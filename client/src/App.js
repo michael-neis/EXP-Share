@@ -1,50 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
-import React, {useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import LoggedIn from './components/LoggedIn'
+import LoggedOut from './components/LoggedOut'
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authenticated, setAuthenticated] = useState(false);
+
   useEffect(() => {
-    fetch('api/me')
-    .then(res => res.json())
-    .then(data =>{
-        console.log(data)
-    })
-}, [])
+    fetch("/api/me", {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+          setAuthenticated(true);
+        });
+      } else {
+        setAuthenticated(true);
+      }
+    });
+  }, []);
 
-const handleTestClick2 = () => {
-
-  const configObj = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-  },
-    body: JSON.stringify({game_id: '1942'})
+  if (!authenticated) {
+    return <div></div>;
   }
 
-  fetch("api/test_games", configObj)
-  .then(res => res.json())
-  .then(data => console.log(data))
-}
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <button onClick={handleTestClick2}>Test the other thing</button>
-    </div>
+      <>
+        {currentUser ? (<LoggedIn setCurrentUser={setCurrentUser} currentUser={currentUser}/>) : (<LoggedOut setCurrentUser={setCurrentUser} currentUser={currentUser}/>)}
+      </>
   );
 }
 

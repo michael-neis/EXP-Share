@@ -1,10 +1,15 @@
+import { useState } from 'react'
 
-
-function HomePage(){
+function HomePage({ setCurrentUser, currentUser }){
 
     return(
-        <div>
-            home
-        </div>
+        <>
+            <h1>EXP Share</h1>
+            <a href='/search'>Search Games</a>
+            <a href='/discover'>Discover</a>
+            <a href='/lists'>My Lists</a>
+        </>
     )
 }
+
+export default HomePage

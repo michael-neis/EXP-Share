@@ -14,8 +14,18 @@ class Api::ReviewsController < ApplicationController
 
     def create
         if params[:user_id] == current_user.id
-            new_review = Review.create!(review_params)
-            render json: new_review, status: :created
+
+        game = Game.find_by(api_id: params[:api_id])
+
+            if game
+                new_review = Review.create!(user_id: current_user.id, game_id: game.id, rating: params[:rating], comment: params[:comment])
+                render json: new_review, status: :created
+            else
+                new_game = Game.create!(api_id: params[:api_id], title: params[:title], image_id: params[:image_id], total_rating: params[:total_rating])
+                new_game_review = Review.create!(user_id: current_user.id, game_id: new_game.id, rating: params[:rating], comment: params[:comment])
+                render json: new_game_review, status: :created
+            end
+
         else
             render json: {errors: "Access denied"}, status: :forbidden
         end
@@ -39,7 +49,7 @@ class Api::ReviewsController < ApplicationController
     end
 
     def review_params
-        params.permit(:rating, :comment, :game_id, :user_id)
+        params.permit(:rating, :comment, :api_id, :user_id)
     end
 
     def is_authorized

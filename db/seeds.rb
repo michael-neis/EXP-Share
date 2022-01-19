@@ -7,9 +7,9 @@ mitch = User.create(username: "chocolaterain", profile_pic: "https://www.nicepng
 
 
 puts 'Creating games...'
-bomb = Game.create(api_id: 1902, title: "Dirty Bomb", cover_image: "//images.igdb.com/igdb/image/upload/t_thumb/co28xg.jpg", total_rating: 59.7246095652837)
-speed = Game.create(api_id: 102, title: "Need for Speed: Shift", cover_image: "//images.igdb.com/igdb/image/upload/t_thumb/co209o.jpg", total_rating: 76.6925456903079)
-mission = Game.create(api_id: 1502, title: "Front Mission 3", cover_image: "//images.igdb.com/igdb/image/upload/t_thumb/co2v52.jpg", total_rating: 80.7336379331722)
+bomb = Game.create(api_id: 1902, title: "Dirty Bomb", image_id: "co28xg", total_rating: 59.7246095652837)
+speed = Game.create(api_id: 102, title: "Need for Speed: Shift", image_id: "co209o", total_rating: 76.6925456903079)
+mission = Game.create(api_id: 1502, title: "Front Mission 3", image_id: "co2v52", total_rating: 80.7336379331722)
 
 puts 'Creating lists...'
 mikes = List.create(user_id: mike.id, list_name: 'some games', public: true)

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     post "/signup", to: "users#create"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-    post '/test_games', to: "games#game_test"
+    post '/show_game', to: "games#show_game"
+    post '/search_games', to: "games#search_games"
 
 
     get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -14,11 +14,21 @@ class Api::WishlistsController < ApplicationController
 
     def create
         if params[:user_id] == current_user.id
-            new_wishlist = Wishlist.create!(wishlist_params)
-            render json: new_wishlist, status: :created
-        else
-            render json: {errors: "Access denied"}, status: :forbidden
-        end
+
+            game = Game.find_by(api_id: params[:api_id])
+    
+                if game
+                    new_wishlist = Wishlist.create!(user_id: current_user.id, game_id: game.id)
+                    render json: new_wishlist, status: :created
+                else
+                    new_game = Game.create!(api_id: params[:api_id], title: params[:title], image_id: params[:image_id], total_rating: params[:total_rating])
+                    new_game_wishlist = Wishlist.create!(user_id: current_user.id, game_id: new_game.id)
+                    render json: new_game_wishlist, status: :created
+                end
+    
+            else
+                render json: {errors: "Access denied"}, status: :forbidden
+            end
     end
 
     def destroy
@@ -31,10 +41,6 @@ class Api::WishlistsController < ApplicationController
 
     def find_wishlist
         @wishlist = Wishlist.find(params[:id])
-    end
-
-    def wishlist_params
-        params.permit(:rating, :comment, :game_id, :user_id)
     end
 
     def is_authorized

@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react'
 import ReviewForm from './ReviewForm'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 function GameDetails({currentUser}){
 
@@ -16,6 +18,10 @@ function GameDetails({currentUser}){
         rating: 0,
         comment: ''
     })
+    const [listOptions, setListOptions] = useState([])
+    const [selectedList, setSelectedList] = useState('Select List')
+    const [addBool, setAddBool] = useState(false)
+    const [gameRubyId, setGameRubyId] = useState(null)
 
     const gameId = localStorage.getItem('gameId')
     useEffect(() => {
@@ -35,6 +41,8 @@ function GameDetails({currentUser}){
                  setGameExists(true)
                  setReview(data.review)
                  setWishlist(data.wishlist)
+                 setListOptions(data.lists)
+                 setGameRubyId(data.db_id)
                  if(data.review && data.review.comment){
                     setFormData({
                         rating: data.review.rating,
@@ -227,6 +235,50 @@ function GameDetails({currentUser}){
         })
     }
 
+    const handleListChange = (e) => {
+        setSelectedList(e.value)
+        setAddBool(true)
+    }
+
+    const handleAddClick = () => {
+        const list = listOptions.find(list => list.list_name === selectedList)
+
+        const configObj = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                api_id: game.id,
+                list_id: list.id,
+                game_id: gameRubyId,
+                image_id: game.cover.image_id,
+                title: game.name,
+                total_rating: game.total_rating
+            })
+        }
+        fetch('/api/list_items', configObj).then(res => {
+            if(res.ok){
+                res.json()
+                .then(data => {
+                    setGameRubyId(data.game_id)
+                    alert('Added to list!')
+                })
+            }else{
+                res.json()
+                .then(errors => {
+                    if(errors.errors[0] === 'Game has already been taken'){
+                        alert('Game has already been added to this list')
+                    }else{
+                        alert(errors.errors)
+                    }
+                })
+            }
+        })
+    }
+
+    const listNames = listOptions.map((option) => option.list_name)
+
     return(
         <>
             <h1>{game.name}</h1>
@@ -234,6 +286,11 @@ function GameDetails({currentUser}){
             {game && game.total_rating ? <h3>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
             {review ?
             <h3>{review.rating}/10</h3>
+            :
+            null
+            }
+            {review ?
+            <h5>{review.comment}</h5>
             :
             null
             }
@@ -247,6 +304,8 @@ function GameDetails({currentUser}){
             :
             <button onClick={handleAddToWishlist}>Add to wishlist</button>
             }
+            <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/>
+            {addBool ? <button onClick={handleAddClick}>Add to List</button> : null}
             <ReviewForm handleClose={handleClose} handleShow={handleShow} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
         </>
     )

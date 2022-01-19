@@ -54,7 +54,10 @@ class Api::GamesController < ApplicationController
         if game
             review = Review.find_by(user_id: current_user.id, game_id: game.id)
             wishlist = Wishlist.find_by(user_id: current_user.id, game_id: game.id)
+            db_id = game.id
         end
+
+        lists = current_user.lists
 
         response = HTTParty.post("https://api.igdb.com/v4/games",
 
@@ -68,7 +71,7 @@ class Api::GamesController < ApplicationController
 
           api_game = JSON.parse(response.body)
 
-          render json: {game: api_game[0], review: review, wishlist: wishlist}, status: :ok
+          render json: {game: api_game[0], review: review, wishlist: wishlist, lists: lists, db_id: db_id}, status: :ok
     end
 
 

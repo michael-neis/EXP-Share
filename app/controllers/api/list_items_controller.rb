@@ -2,8 +2,7 @@ class Api::ListItemsController < ApplicationController
 
     skip_before_action :authenticate_user, only: [:index, :show]
     before_action :find_item, only: [:show, :destroy]
-    before_action :find_list, only: [:create, :destroy]
-    before_action :is_authorized, only: [:destroy, :create]
+    before_action :find_list, only: [:create]
 
     def index
         render json: ListItem.all, status: :ok
@@ -14,13 +13,21 @@ class Api::ListItemsController < ApplicationController
     end
 
     def create
-        new_item = ListItem.create!(item_params)
-        render json: new_item, status: :created
+        if @list.user_id == current_user.id
+            new_item = ListItem.create!(item_params)
+            render json: new_item, status: :created
+        else
+            render json: {errors: "Access denied"}, status: :forbidden
+        end
     end
 
     def destroy
-        @item.destroy
-        head :no_content
+        if @item.list.user_id == current_user.id
+            @item.destroy
+            head :no_content
+        else
+            render json: {errors: "Access denied"}, status: :forbidden
+        end
     end
 
 
@@ -36,10 +43,5 @@ class Api::ListItemsController < ApplicationController
 
     def item_params
         params.permit(:list_id, :game_id)
-    end
-
-    def is_authorized
-        permitted = @list.user_id == current_user.id
-        render json: {errors: "Access denied"}, status: :forbidden unless permitted
     end
 end

@@ -31,6 +31,12 @@ class Api::ListsController < ApplicationController
         head :no_content
     end
 
+    def user_lists
+        user = User.find(params[:id])
+        lists = user.lists
+        render :json => lists, status: :ok
+    end
+
 
     private
 

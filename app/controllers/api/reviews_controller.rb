@@ -41,6 +41,11 @@ class Api::ReviewsController < ApplicationController
         head :no_content
     end
 
+    def user_reviews
+        user = User.find(params[:id])
+        games = user.reviewed_games
+        render :json => games, status: :ok
+    end
 
     private
 

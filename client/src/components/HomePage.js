@@ -1,6 +1,5 @@
-import { useState } from 'react'
 
-function HomePage({ setCurrentUser, currentUser }){
+function HomePage(){
 
     return(
         <>

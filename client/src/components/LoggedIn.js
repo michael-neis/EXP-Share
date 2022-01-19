@@ -14,11 +14,11 @@ function LoggedIn({ setCurrentUser, currentUser }){
             <Header setCurrentUser={setCurrentUser} currentUser={currentUser}/>
             <div className="routesDiv">
             <Routes>
-                <Route path='/' element={<HomePage setCurrentUser={setCurrentUser} currentUser={currentUser}/>} />
+                <Route path='/' element={<HomePage />} />
                 <Route path='/search' element={<SearchGames />} />
                 <Route path='/game' element={<GameDetails currentUser={currentUser}/>} />
                 <Route path='/discover' element={<DiscoverGames />} />
-                <Route path='/lists' element={<MyLists />} />
+                <Route path='/lists' element={<MyLists currentUser={currentUser}/>} />
             </Routes>
             </div>
         </>

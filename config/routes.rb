@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
     post '/show_game', to: "games#show_game"
     post '/search_games', to: "games#search_games"
+    get '/user_lists/:id', to: "lists#user_lists"
+    get '/user_reviews/:id', to: "reviews#user_reviews"
+    get '/user_wishlists/:id', to: "wishlists#user_wishlists"
+    get '/list_games/:id', to: "lists#list_games"
 
 
     get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

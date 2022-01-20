@@ -13,6 +13,11 @@ function UserModal({showUserModal, handleClose, currentUser, setCurrentUser}){
         history('/')
     }
 
+    const handleEditProfile = () => {
+        handleClose();
+        history('/my_profile')
+    }
+
 
     return(
     <>
@@ -21,8 +26,8 @@ function UserModal({showUserModal, handleClose, currentUser, setCurrentUser}){
             <Modal.Title>{currentUser.username}</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-            <Button onClick={handleClose}>
-                Edit Profile
+            <Button onClick={handleEditProfile}>
+                My Profile
             </Button>
             <Button variant="warning" onClick={handleLogout}>
                 Logout

@@ -306,7 +306,7 @@ function GameDetails({currentUser}){
             }
             <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/>
             {addBool ? <button onClick={handleAddClick}>Add to List</button> : null}
-            <ReviewForm handleClose={handleClose} handleShow={handleShow} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
+            <ReviewForm handleClose={handleClose} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
         </>
     )
 }

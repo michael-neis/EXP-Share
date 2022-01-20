@@ -7,6 +7,7 @@ import GameDetails from './GameDetails'
 import Header from "./Header";
 import Friends from "./Friends"
 import SearchUsers from "./SearchUsers"
+import MyProfile from "./MyProfile";
 
 
 function LoggedIn({ setCurrentUser, currentUser }){
@@ -23,6 +24,7 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/lists' element={<MyLists currentUser={currentUser}/>} />
                 <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
                 <Route path='/search_users' element={<SearchUsers currentUser={currentUser}/>} />
+                <Route path='/my_profile' element={<MyProfile currentUser={currentUser}/>} />
             </Routes>
             </div>
         </>

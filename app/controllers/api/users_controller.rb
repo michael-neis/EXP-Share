@@ -33,6 +33,15 @@ class Api::UsersController < ApplicationController
         end
     end
 
+    def search_users
+        if current_user.username == params[:username]
+            render json: {error: "that is you!"}, status: :unauthorized
+        else
+            user = User.find_by!(username: params[:username])
+            render json: user, status: :ok
+        end
+    end
+
     private
 
     def user_params

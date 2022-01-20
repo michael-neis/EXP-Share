@@ -5,6 +5,8 @@ import DiscoverGames from './DiscoverGames'
 import MyLists from './MyLists'
 import GameDetails from './GameDetails'
 import Header from "./Header";
+import Friends from "./Friends"
+import SearchUsers from "./SearchUsers"
 
 
 function LoggedIn({ setCurrentUser, currentUser }){
@@ -19,6 +21,8 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/game' element={<GameDetails currentUser={currentUser}/>} />
                 <Route path='/discover' element={<DiscoverGames />} />
                 <Route path='/lists' element={<MyLists currentUser={currentUser}/>} />
+                <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
+                <Route path='/search_users' element={<SearchUsers currentUser={currentUser}/>} />
             </Routes>
             </div>
         </>

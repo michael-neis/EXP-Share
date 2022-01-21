@@ -105,9 +105,12 @@ function Friends({ currentUser }){
 
     return(
         <>
-            <h1 onClick={() => setRequestBool(false)}>Friends</h1>
-            <h1 onClick={handleShowRequests}>Friend Requests</h1>
+        <div className="friend-container">
+            <button className="nes-btn is-primary" onClick={() => setRequestBool(false)}>Friends</button>
+            <button className="nes-btn is-success" onClick={handleShowRequests}>Friend Requests</button>
+        </div>
             {requestBool ? displayRequests : displayFriends}
+        
         </>
     )
 }

@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import "nes.css/css/nes.min.css";
+import "@fontsource/press-start-2p";
 
 ReactDOM.render(
   <BrowserRouter>

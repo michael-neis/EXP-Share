@@ -1,5 +1,5 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,20 +28,20 @@ function FriendCard({friend, handleRemoveFriend}){
     }
 
     return(
-        <div>
+        <div className="friendCard">
             <h1 onClick={handleFriendClick}>{friend.username}</h1>
-            <button onClick={handleRemoveModal}>Remove Friend</button>
+            <button className="nes-btn is-warning" onClick={handleRemoveModal}>Remove Friend</button>
             <Modal show={showRemove} onHide={handleRemoveClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Are you sure you wish to remove {friend.username} as a friend?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Button variant="secondary" onClick={handleRemoveClose}>
+                <button variant="secondary" onClick={handleRemoveClose}>
                     Cancel
-                </Button>
-                <Button variant="danger" onClick={handleRemoveClick} style={{float: 'right'}}>
+                </button>
+                <button onClick={handleRemoveClick} style={{float: 'right'}}>
                     Remove
-                </Button>
+                </button>
                 </Modal.Body>
             </Modal>
         </div>

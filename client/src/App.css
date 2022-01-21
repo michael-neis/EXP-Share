@@ -1,5 +1,182 @@
-.App {
+.friendCard {
   text-align: center;
+}
+
+.login-buttons{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60vh;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 20;
+}
+
+.landing-title{
+  position: absolute;
+  margin-top: 30vh;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 54px; 
+  font-weight: 300; 
+  line-height: 58px;
+  letter-spacing: 80px;
+  animation: color-change 7s infinite;
+}
+
+.home-page{
+  background-image: url('https://wallpapercave.com/wp/wp4162395.jpg');
+  background-size: cover;
+   min-width: 100%;
+   min-height: 100%;
+}
+
+body {
+  background-image: url('https://wallpapercave.com/wp/wp4162395.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.friend-container {
+  text-align: center;
+  /* justify-content: space-around; */
+  /* display: flex; */
+}
+
+
+.friend-container button {
+  margin: 0 8% 2% 8%
+}
+
+.ref-ul {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+}
+.ref-ul li {
+  list-style: none;
+  width: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.ref-ul li a {
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  margin: 20px 0;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 0.5s;
+  z-index: 1;
+}
+.ref-ul li a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: scaleY(2);
+  opacity: 0;
+  transition: 0.3s;
+}
+.ref-ul li a:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  transform: scale(0);
+  opacity: 0;
+  transition: 0.3s;
+  z-index: -1;
+}
+.ref-ul li a:hover {
+  color: rgb(0, 0, 0);
+}
+.ref-ul li a:hover:before {
+  transform: scaleY(1);
+  opacity: 1;
+}
+.ref-ul li a:hover:after {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.header{
+  margin-top: 3%;
+  /* text-align: center; */
+  padding: 0 15px 0 10px;
+  /* display: inline-block; */
+  /* justify-content: center; */
+}
+
+.header img {
+  background: rgba(76, 175, 80, 0);
+}
+
+.exp-header {
+  /* animation: color-change 7s infinite; */
+  color: greenyellow;
+  font-size: 300%;
+}
+
+.home-page{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+@keyframes color-change {
+  0% { color: rgb(255, 0, 0); }
+  4% { color: rgb(255, 81, 0); }
+  8% { color: rgb(255, 136, 0); }
+  12% { color: rgb(255, 174, 0); }
+  16% { color: rgb(255, 230, 0); }
+  20% { color: rgb(251, 255, 0); }
+  24% { color: rgb(208, 255, 0); }
+  28% { color: rgb(145, 255, 0); }
+  32% { color: rgb(0, 255, 0); }
+  36% { color: rgb(0, 255, 85); }
+  40% { color: rgb(0, 255, 157); }
+  44% { color: rgb(0, 255, 255); }
+  48% { color: rgb(0, 217, 255); }
+  52% { color: rgb(0, 153, 255); }
+  56% { color: rgb(0, 102, 255); }
+  60% { color: rgb(0, 26, 255); }
+  64% { color: rgb(55, 0, 255); }
+  68% { color: rgb(68, 0, 255); }
+  72% { color: rgb(119, 0, 255); }
+  76% { color: rgb(162, 0, 255); }
+  80% { color: rgb(234, 0, 255); }
+  84% { color: rgb(255, 0, 255); }
+  88% { color: rgb(255, 0, 170); }
+  92% { color: rgb(255, 0, 76); }
+  96% { color: rgb(255, 0, 0); }
+  100% { color: rgb(255, 0, 0); }
 }
 
 .App-logo {
@@ -39,4 +216,11 @@
 
 .routesDiv {
   padding-top: 100px
+}
+
+.login-logout {
+  width: 50%;
+  margin: auto;
+  color: white;
+  font-family: "Press Start 2P";
 }

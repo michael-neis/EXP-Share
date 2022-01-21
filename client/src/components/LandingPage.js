@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom';
 
 function LandingPage(){
@@ -13,11 +12,11 @@ function LandingPage(){
 
 
     return(
-        <div >
-            <h1 className="planit-title">EXP Share</h1>
+        <div>
+            <h1 className="landing-title">EXP Share</h1>
             <div className="login-buttons">
-            <Button onClick={handleLogin} style={{marginRight: '5%'}}>Login</Button>
-            <Button variant="info" onClick={handleSignUp} style={{marginLeft: '5%'}}>Signup</Button>
+            <button className="nes-btn is-primary" onClick={handleLogin} style={{marginRight: '5%'}}>Login</button>
+            <button className="nes-btn is-success" variant="info" onClick={handleSignUp} style={{marginLeft: '5%'}}>Signup</button>
             </div>
         </div>
     )

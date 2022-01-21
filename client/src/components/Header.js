@@ -1,5 +1,3 @@
-import SvgIcon from '@mui/material/SvgIcon';
-import Fab from '@mui/material/Fab';
 import {Link} from 'react-router-dom'
 import UserModal from './UserModal'
 import {useState} from 'react'
@@ -16,22 +14,15 @@ function Header({ setCurrentUser, currentUser}){
         setShowUserModal(false)
     }
 
-    function HomeIcon(props) {
-        return (
-          <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-        );
-    }
-
     return(
-        <div>
-        <Link to="/" style={{ textDecoration: 'none', position: 'absolute', marginLeft: 20 }}>
-                <Fab color="active" size="small">
-                    <HomeIcon />
-                </Fab>
+        <div className="header">
+        <Link to="/" style={{ textDecoration: 'none', marginLeft: "2%" }}>
+            <button className="nes-btn is-warning" style={{textAlign: 'center'}}>
+                <img className="nes-avatar" alt="Home Button" src="https://cdn-icons-png.flaticon.com/512/25/25694.png" style={{imageRendering: "pixelated"}}/>
+            </button>
         </Link>
-        <button onClick={handleShow} style={{float: 'right', marginRight: 10, height: '30px'}}>{currentUser.username}</button>
+        <button className="nes-btn is-primary" onClick={handleShow} style={{ float: 'right'}}>{currentUser.username}</button>
+        <h1 className='exp-header' style={{textAlign: 'center'}}>EXP Share</h1>
         <UserModal handleClose={handleClose} currentUser={currentUser} showUserModal={showUserModal} setCurrentUser={setCurrentUser}/>
         </div>
     )

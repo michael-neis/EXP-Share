@@ -52,57 +52,38 @@ function Login({ setCurrentUser }){
 	}
 
 	return(
-      <Container component="main" maxWidth="xs">
+      <div className="login-logout">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 20,
-            marginLeft: -9,
+            marginTop: 18,
+            // marginLeft: -9,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            position: 'absolute',
+            alignItems: 'center'
+            // position: 'absolute',
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <h3>
             Log In
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-			  value={formData.username}
-			  onChange={(e) => setFormData({...formData, username: e.target.value})}
-            style={{backgroundColor: '#dbdbdb', borderRadius: 10}}/>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-			  value={formData.password}
-			  onChange={(e) => setFormData({...formData, password: e.target.value})}
-        style={{backgroundColor: '#dbdbdb', borderRadius: 10}}
-            />
-            <Button
+          </h3>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+          
+            <input type="text" id="username" className="nes-input is-dark" placeholder="Username" value={formData.username}
+            onChange={(e) => setFormData({...formData, username: e.target.value})} label="Username" style={{marginBottom: 40}}></input>
+  
+            <input type="password" id="password" className="nes-input is-dark" placeholder="Password" value={formData.password}
+            onChange={(e) => setFormData({...formData, password: e.target.value})} label="Password" style={{marginBottom: 30}}></input>
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="nes-btn is-primary"
+              style={{width: '100%'}}
             >
               Log In
-            </Button>
+            </button>
             <Grid container>
               <Grid item>
                 <Link href="/signup" variant="body2" style={{textDecoration: 'none'}}>
@@ -113,13 +94,13 @@ function Login({ setCurrentUser }){
             <Grid container>
               <Grid item>
                 <Link href="/" variant="body2" style={{textDecoration: 'none'}}>
-                  {"Home"}
+                  {"Back"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </Container>
+      </div>
 	)
 }
 

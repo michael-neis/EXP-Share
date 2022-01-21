@@ -52,80 +52,44 @@ function Signup({ setCurrentUser }) {
   }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData({ ...formData, [e.target.id]: e.target.value })
   }
 
   return (
-      <Container component="main" maxWidth="xs">
+      <div className="login-logout">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 18,
-            marginLeft: -15,
+            // marginLeft: -8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            position: 'absolute'
+            alignItems: 'center'
+            // position: 'absolute'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <h3>
             Sign up
-          </Typography>
+          </h3>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="username"
-                  name="username"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  onChange={(e) => handleChange(e)}
-                  value={formData.username}
-                  style={{backgroundColor: '#dbdbdb', borderRadius: 10}}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  name="password"
-                  autoComplete="new-password"
-                  type="password"
-                  onChange={(e) => handleChange(e)}
-                  value={formData.password}
-                  style={{backgroundColor: '#dbdbdb', borderRadius: 10}}
-                />
-              </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password_confirmation"
-                  label="Confirm Password"
-                  type="password"
-                  id="password_confirmation"
-                  autoComplete="confirm-password"
-                  onChange={(e) => handleChange(e)}
-                  value={formData.password_confirmation}
-                  style={{backgroundColor: '#dbdbdb', borderRadius: 10}}
-                />
-              </Grid> */}
-            </Grid>
-            <Button
+          
+                <input type="text" id="username" className="nes-input is-dark" placeholder="Username" value={formData.username}
+                onChange={(e) => handleChange(e)} label="Username" style={{marginBottom: 40}}></input>
+    
+                <input type="password" id="password" className="nes-input is-dark" placeholder="Password" value={formData.password}
+                onChange={(e) => handleChange(e)} label="Password" style={{marginBottom: 30}}></input>
+        
+      
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="nes-btn is-success"
+              style={{width: '100%'}}
             >
               Sign Up
-            </Button>
+            </button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/login" variant="body2" style={{textDecoration: 'none'}}>
@@ -136,13 +100,13 @@ function Signup({ setCurrentUser }) {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/" variant="body2" style={{textDecoration: 'none'}}>
-                    Home
+                    Back
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </Container>
+      </div>
   );
 }
 

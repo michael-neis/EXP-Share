@@ -6,11 +6,12 @@ function ListGameCard({ game, listDesc, handleRemoveFromList, itemId }){
     let history = useNavigate()
     
     let gameButton
+    let reviewRating
+    let reviewComment
 
     if(listDesc === 'reviews'){
-        gameButton = <button>review</button>
-    }else if(listDesc === 'wishlist'){
-        gameButton = <button>wishlist</button>
+        reviewRating = <h3>{game.rating}/10</h3>
+        reviewComment = <h4>{game.comment}</h4>
     }else if(listDesc === 'list'){
         gameButton = <button onClick={() => handleRemoveFromList(itemId)}>Remove from list</button>
     }
@@ -23,6 +24,8 @@ function ListGameCard({ game, listDesc, handleRemoveFromList, itemId }){
     return(
         <div>
             <h1 style={{cursor: 'pointer'}} onClick={handleTitleClick}>{game.title}</h1>
+            {reviewRating}
+            {reviewComment}
             {gameButton}
         </div>
     )

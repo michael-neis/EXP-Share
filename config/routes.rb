@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get '/user_reviews/:id', to: "reviews#user_reviews"
     get '/user_wishlists/:id', to: "wishlists#user_wishlists"
     post '/search_users', to: "users#search_users"
+    get '/show_user/:id', to: "users#show_user"
    
 
 

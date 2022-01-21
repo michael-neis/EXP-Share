@@ -24,6 +24,7 @@ function GameDetails({currentUser}){
     const [gameRubyId, setGameRubyId] = useState(null)
 
     const gameId = localStorage.getItem('gameId')
+    
     useEffect(() => {
 
         const configObj = {

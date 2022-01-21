@@ -38,8 +38,8 @@ class Api::WishlistsController < ApplicationController
 
     def user_wishlists
         user = User.find(params[:id])
-        games = user.wishlist_games
-        render :json => games, status: :ok
+        wishlists = user.wishlists
+        render :json => wishlists, status: :ok
     end
 
     private

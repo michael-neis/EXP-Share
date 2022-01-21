@@ -38,6 +38,7 @@ function MyLists({currentUser}){
         if(res.ok){
           res.json()
           .then(data => {
+            console.log(data)
             setListDesc('reviews')
             setListGames(data)
             setListName(e.target.innerHTML)
@@ -54,6 +55,7 @@ function MyLists({currentUser}){
         if(res.ok){
           res.json()
           .then(data => {
+            console.log(data)
             setListDesc('wishlist')
             setListGames(data)
             setListName(e.target.innerHTML)
@@ -70,6 +72,7 @@ function MyLists({currentUser}){
         if(res.ok){
           res.json()
           .then(data => {
+            console.log(data)
             setListGames(data.list_items)
             setListDesc('list')
             setListName(e.target.innerHTML)

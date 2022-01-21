@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
     skip_before_action :authenticate_user, only: [:create, :me]
-    before_action :find_user, only: [:update, :destroy]
+    before_action :find_user, only: [:update, :destroy, :show_user]
     before_action :is_authorized, only: [:update, :destroy]
 
     def create
@@ -39,6 +39,14 @@ class Api::UsersController < ApplicationController
         else
             user = User.find_by!(username: params[:username])
             render json: user, status: :ok
+        end
+    end
+
+    def show_user
+        if current_user.friends.include?(@user)
+            render json: @user, serializer: FriendUserSerializer, status: :ok
+        else
+            render json: @user, serializer: NonfriendUserSerializer, status: :ok
         end
     end
 

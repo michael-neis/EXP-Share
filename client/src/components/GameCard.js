@@ -9,10 +9,10 @@ function GameCard({ game }){
     }
 
     return(
-        <>
-            <h1 onClick={handleClick}>{game.name}</h1>
-            <img alt={game.name} src={game.cover && game.cover.image_id ? `https://images.igdb.com/igdb/image/upload/t_1080p/${game.cover.image_id}.jpg` : 'https://www.nicepng.com/png/detail/246-2469081_jake-adventure-time-and-jake-the-dog-image.png'}/>
-        </>
+        <div className="game-card" onClick={handleClick}>
+            <img alt={game.name} src={game.cover && game.cover.image_id ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png'}/>
+            <p>{game.name}</p>
+        </div>
     )
 }
 

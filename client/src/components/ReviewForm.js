@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
@@ -43,21 +42,21 @@ function ReviewForm({game, handleClose, showReviewModal, handleSubmit, formData,
     return(
     <>
     <Modal show={showDelete} onHide={handleDeleteClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>Are you sure you wish to remove this review?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Button variant="secondary" onClick={handleDeleteClose}>
+          <button className='nes-btn' onClick={handleDeleteClose}>
             Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDeleteClick} style={{float: 'right'}}>
+          </button>
+          <button className='nes-btn is-error' onClick={handleDeleteClick} style={{float: 'right'}}>
             Delete
-          </Button>
+          </button>
         </Modal.Body>
     </Modal>
 
     <Modal show={showReviewModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
             <Modal.Title>{game.name}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={(e) => handleSubmit(e)}>
@@ -74,12 +73,12 @@ function ReviewForm({game, handleClose, showReviewModal, handleSubmit, formData,
                     />
             </Form.Group>   
         <Modal.Footer>
-            {review ? <Button variant="danger" onClick={handleDeleteModal}>
+            {review ? <button className='nes-btn is-error' style={{fontSize: '11px'}} onClick={handleDeleteModal}>
                 Remove
-            </Button> : null}
-            <Button variant="success" type='submit'>
+            </button> : null}
+            <button className='nes-btn is-success' style={{fontSize: '11px'}} type='submit'>
                 Submit
-            </Button>
+            </button>
         </Modal.Footer>
         </Form>
     </Modal>

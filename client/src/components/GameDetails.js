@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import ReviewForm from './ReviewForm'
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 function GameDetails({currentUser}){
@@ -19,8 +18,7 @@ function GameDetails({currentUser}){
         comment: ''
     })
     const [listOptions, setListOptions] = useState([])
-    const [selectedList, setSelectedList] = useState('Select List')
-    const [addBool, setAddBool] = useState(false)
+    const [selectedList, setSelectedList] = useState('default.list.101783')
     const [gameRubyId, setGameRubyId] = useState(null)
 
     const gameId = localStorage.getItem('gameId')
@@ -68,10 +66,6 @@ function GameDetails({currentUser}){
 
     if (!gameExists) {
         return <div>Loading...</div>;
-    }
-
-    const handleShow = () => {
-        setShowReviewModal(true)
     }
 
     const handleClose = () => {
@@ -237,11 +231,17 @@ function GameDetails({currentUser}){
     }
 
     const handleListChange = (e) => {
-        setSelectedList(e.value)
-        setAddBool(true)
+        setSelectedList(e.target.value)
     }
 
     const handleAddClick = () => {
+
+
+        if(selectedList === 'default.list.101783'){
+            alert('Please select a list')
+        }else{
+
+        
         const list = listOptions.find(list => list.list_name === selectedList)
 
         const configObj = {
@@ -276,39 +276,64 @@ function GameDetails({currentUser}){
                 })
             }
         })
-    }
+    }}
 
-    const listNames = listOptions.map((option) => option.list_name)
+
+    const listNames = listOptions.map((option) => <option value={option.list_name} key={option.list_name}>{option.list_name}</option>)
 
     return(
-        <>
-            <h1>{game.name}</h1>
-            <img alt={game.name} src={game.cover && game.cover.image_id ? `https://images.igdb.com/igdb/image/upload/t_1080p/${game.cover.image_id}.jpg` : 'https://www.nicepng.com/png/detail/246-2469081_jake-adventure-time-and-jake-the-dog-image.png'} className="detailPhoto"/>
-            {game && game.total_rating ? <h3>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
+        <div className="game-details">
+            <h1 style={{marginBottom: 20}}>{game.name}</h1>
+            <img alt={game.name} src={game.cover && game.cover.image_id ? `https://images.igdb.com/igdb/image/upload/t_1080p/${game.cover.image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png'} className="detailPhoto"/>
+            {game && game.total_rating ? <h3 style={{marginTop: 40}}>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
+            <br/>
+            {review ?
+            <h3>My Rating:</h3>
+            :
+            null
+            }
             {review ?
             <h3>{review.rating}/10</h3>
             :
             null
             }
             {review ?
-            <h5>{review.comment}</h5>
+            <h4>"{review.comment}"</h4>
             :
             null
             }
             {review ?
-            <button onClick={handleReviewPopup}>Edit Review</button>
+            <button className='nes-btn is-warning' onClick={handleReviewPopup}>Edit Review</button>
             :
-            <button onClick={handleReviewPopup}>Add Review</button>
+            <button className='nes-btn is-success' onClick={handleReviewPopup}>Add Review</button>
             }
+            <br/>
             {wishlist ? 
-            <button onClick={handleRemoveFromWishlist}>Remove from wishlist</button>
+            <button style={{marginTop: '10px'}} className='nes-btn is-error' onClick={handleRemoveFromWishlist}>Remove from wishlist</button>
             :
-            <button onClick={handleAddToWishlist}>Add to wishlist</button>
+            <button style={{marginTop: '10px'}} className='nes-btn is-success' onClick={handleAddToWishlist}>Add to wishlist</button>
             }
-            <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/>
-            {addBool ? <button onClick={handleAddClick}>Add to List</button> : null}
+            <br/>
+            {/* <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/> */}
+            <br/>
+            <h4>Add to List:</h4>
+            <select value={selectedList} onChange={handleListChange} style={{fontSize: '19px'}}>
+                <option value="default.list.101783">Select a List</option>
+                {listNames}
+            </select>
+            <button className='nes-btn is-success' onClick={handleAddClick} style={{fontSize: '10px', marginLeft: '8px'}}>Add</button>
+            <br/>
+            <br/>
+            <button className='nes-btn is-primary'>Suggest to Friend</button>
+            <br/>
+            <br/>
+            {game.summary ? <h5>Game Summary:</h5> : null}
+            {game.summary ? <p>{game.summary}</p> : null}
+
+
+
             <ReviewForm handleClose={handleClose} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
-        </>
+        </div>
     )
 }
 

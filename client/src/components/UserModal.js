@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom';
 
 function UserModal({showUserModal, handleClose, currentUser, setCurrentUser}){
@@ -22,16 +21,16 @@ function UserModal({showUserModal, handleClose, currentUser, setCurrentUser}){
     return(
     <>
     <Modal show={showUserModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
             <Modal.Title>{currentUser.username}</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-            <Button onClick={handleEditProfile}>
+            <button className='nes-btn is-primary' style={{fontSize: 10, marginRight: 10}} onClick={handleEditProfile}>
                 My Profile
-            </Button>
-            <Button variant="warning" onClick={handleLogout}>
+            </button>
+            <button className='nes-btn is-warning' style={{fontSize: 10}} variant="warning" onClick={handleLogout}>
                 Logout
-            </Button>
+            </button>
         </Modal.Footer>
     </Modal>
     </>

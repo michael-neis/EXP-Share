@@ -10,8 +10,8 @@ function ListGameCard({ game, listDesc, handleRemoveFromList, itemId }){
     let reviewComment
 
     if(listDesc === 'reviews'){
-        reviewRating = <h3>{game.rating}/10</h3>
-        reviewComment = <h4>{game.comment}</h4>
+        reviewRating = <p>{game.rating}/10</p>
+        game.comment ? reviewComment = <p>"{game.comment}"</p> : reviewComment = null
     }else if(listDesc === 'list'){
         gameButton = <button onClick={() => handleRemoveFromList(itemId)}>Remove from list</button>
     }
@@ -22,8 +22,9 @@ function ListGameCard({ game, listDesc, handleRemoveFromList, itemId }){
     }
 
     return(
-        <div>
-            <h1 style={{cursor: 'pointer'}} onClick={handleTitleClick}>{game.title}</h1>
+        <div className="game-card">
+            <img alt={game.title} src={game.image_id ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png'}  onClick={handleTitleClick}/>
+            <p  onClick={handleTitleClick}>{game.title}</p>
             {reviewRating}
             {reviewComment}
             {gameButton}

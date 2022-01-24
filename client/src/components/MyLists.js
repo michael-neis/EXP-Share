@@ -8,13 +8,14 @@ function MyLists({currentUser}){
   const [listGames, setListGames] = useState([])
   const [listDesc, setListDesc] = useState('')
   const [listName, setListName] = useState('')
-  const [selectedList, setSelectedList] = useState('')
+  const [selectedList, setSelectedList] = useState('default.list.829920')
   const [showListModal, setShowListModal] = useState(false)
   const [formData, setFormData] = useState({
       user_id: currentUser.id,
       list_name: '',
       public: true
   })
+
 
   useEffect(() => {
     fetch(`/api/user_lists/${currentUser.id}`).then(res => {
@@ -26,66 +27,69 @@ function MyLists({currentUser}){
       }else{
         res.json()
         .then(errors => {
-          console.log(errors)
+          alert(errors.errors)
         })
       }
     })
   }, [])
 
-  const handleListClick = (e) => {
-    if(e.target.id === 'reviews'){
+  const handleListChange = (e) => {
+
+    if(e.target.value !== 'default.list.829920'){
+
+    setSelectedList(e.target.value)
+
+    if(e.target.value === 'reviews'){
       fetch(`api/user_reviews/${currentUser.id}`).then(res => {
         if(res.ok){
           res.json()
           .then(data => {
-            console.log(data)
             setListDesc('reviews')
             setListGames(data)
-            setListName(e.target.innerHTML)
+            setListName('My Reviews')
           })
         }else{
           res.json()
           .then(errors => {
-            console.log(errors)
+            alert(errors.error)
           })
         }
       })
-    }else if(e.target.id === 'wishlist'){
+    }else if(e.target.value === 'wishlist'){
       fetch(`api/user_wishlists/${currentUser.id}`).then(res => {
         if(res.ok){
           res.json()
           .then(data => {
-            console.log(data)
             setListDesc('wishlist')
             setListGames(data)
-            setListName(e.target.innerHTML)
+            setListName("My Wishlist")
           })
         }else{
           res.json()
           .then(errors => {
-            console.log(errors)
+            alert(errors.error)
           })
         }
       })
     }else{
-      fetch(`api/lists/${e.target.id}`).then(res => {
+      fetch(`api/lists/${e.target.value}`).then(res => {
         if(res.ok){
           res.json()
           .then(data => {
-            console.log(data)
             setListGames(data.list_items)
             setListDesc('list')
-            setListName(e.target.innerHTML)
+            setListName(data.list_name)
           })
         }else{
           res.json()
           .then(errors => {
-            console.log(errors)
+            alert(errors.error)
           })
         }
       })
     }
-  }
+  }}
+
 
   const handleRemoveFromList = (itemId) => {
     fetch(`/api/list_items/${itemId}`,  { method: 'DELETE' }).then(res => {
@@ -142,7 +146,7 @@ function MyLists({currentUser}){
       }else{
         res.json()
         .then(errors => {
-          console.log(errors)
+          alert(errors.errors)
         })
       }
     })
@@ -198,10 +202,11 @@ function MyLists({currentUser}){
     handleShow()
   }
 
+
   let displayLists = null
 
   if(lists.length > 0){
-    displayLists = lists.map(list => <li id={list.id} key={list.id} onClick={handleListClick} style={{cursor: 'pointer'}}>{list.list_name}</li>)
+    displayLists = lists.map(list => <option id={list.id} value={list.id} key={list.id}>{list.list_name}</option>)
   }
 
   let displayGames = null
@@ -215,16 +220,21 @@ function MyLists({currentUser}){
   }
   
     return(
-        <div>
-            <ul> My Lists
-              <li id='reviews' onClick={handleListClick} style={{cursor: 'pointer'}}>Reviews</li>
-              <li id='wishlist' onClick={handleListClick} style={{cursor: 'pointer'}}>Wishlist</li>
+        <div className='all-lists'>
+          <h2>My Lists</h2>
+            <select value={selectedList} onChange={handleListChange}>
+              <option value="default.list.829920">Select a List</option>
+              <option id='reviews' value='reviews'>Reviews</option>
+              <option id='wishlist' value='wishlist'>Wishlist</option>
               {displayLists}
-            </ul>
+            </select>
+            <br/>
             <button onClick={handleNewListClick}>New List</button>
             <h1>{listName}</h1>
             {listDesc === 'list' ? <button onClick={handleEditClick}>Edit List</button> : null}
-            {displayGames}
+            <div className="game-container">
+              {displayGames}
+            </div>
             <ListForm list={selectedList} handleShow={handleShow} showListModal={showListModal} handleClose={handleClose} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
         </div>
     )

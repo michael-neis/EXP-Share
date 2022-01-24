@@ -14,22 +14,22 @@ class Api::GamesController < ApplicationController
         render json: game, status: :created
     end
 
-    def game_test
+    # def game_test
 
-        game_id = params[:game_id]
+    #     game_id = params[:game_id]
 
-        response = HTTParty.post("https://api.igdb.com/v4/games",
+    #     response = HTTParty.post("https://api.igdb.com/v4/games",
 
-            :headers => {
-              "Content-Type" => "text/plain",
-              "Client-ID" => "#{ENV['client_id_token']}",
-              "Authorization" => "#{ENV['authorization_bearer_token']}"
-            },
-            :body => "fields *, collection.name, collection.games.name, cover.url, platforms.name, platforms.platform_logo.url;  where id = #{game_id};"
-          )
+    #         :headers => {
+    #           "Content-Type" => "text/plain",
+    #           "Client-ID" => "#{ENV['client_id_token']}",
+    #           "Authorization" => "#{ENV['authorization_bearer_token']}"
+    #         },
+    #         :body => "fields *, collection.name, collection.games.name, cover.url, platforms.name, platforms.platform_logo.url;  where id = #{game_id};"
+    #       )
           
-          render json: response.body
-    end
+    #       render json: response.body
+    # end
 
     def search_games
 
@@ -42,7 +42,7 @@ class Api::GamesController < ApplicationController
               "Client-ID" => "#{ENV['client_id_token']}",
               "Authorization" => "#{ENV['authorization_bearer_token']}"
             },
-            :body => "search \"#{game_title}\"; fields name, cover.image_id; limit 50;"
+            :body => "search \"#{game_title}\"; fields name, cover.image_id; limit 75;"
           )
           
           render json: response.body
@@ -66,7 +66,7 @@ class Api::GamesController < ApplicationController
               "Client-ID" => "#{ENV['client_id_token']}",
               "Authorization" => "#{ENV['authorization_bearer_token']}"
             },
-            :body => "fields name, cover.image_id, total_rating; where id = #{game_id};"
+            :body => "fields name, cover.image_id, total_rating, summary; where id = #{game_id};"
           )
 
           api_game = JSON.parse(response.body)

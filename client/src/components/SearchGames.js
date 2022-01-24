@@ -48,21 +48,21 @@ function SearchGames(){
     }
 
     return(
-        <>
-            <form onSubmit={handleSubmit}>
+        <div className='game-search'>
+            <form onSubmit={handleSubmit} autoComplete='off'>
+                <h2>Search by Title:</h2>
                 <label>
-                    Title:
-                    <input type="text" name="name" value={searchTitle} onChange={handleChange}/>
+                    <input type="text" name="name" value={searchTitle} onChange={handleChange} style={{height: '40px'}}/>
                 </label>
-                <input type="submit" value="Submit" />
+                <button className="nes-btn is-success" type='submit' style={{fontSize: '14px'}}>Search</button>
             </form>
             {results ? 
-            <ul>
+            <div className="game-container">
                 {displayGames}
-            </ul>
+            </div>
             :
             null}
-        </>
+        </div>
     )
 }
 

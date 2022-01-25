@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import ListGameCard from './ListGameCard'
 import { Modal } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 function UserPage(){
 
@@ -11,6 +12,8 @@ function UserPage(){
     const [showRemove, setShowRemove] = useState(false)
 
     const userId = localStorage.getItem('userId')
+
+    let history = useNavigate()
 
     useEffect(() => {
         fetch(`/api/show_user/${userId}`).then(res => {
@@ -40,16 +43,23 @@ function UserPage(){
         alert('Not Authorized')
     }
 
-    console.log(user)
     const allReviews = user.reviews.map((game) => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'reviews'} handleRemoveFromList={handleRemoveFromList} />)
     const allWishlists= user.wishlists.map((game) => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'wishlist'} handleRemoveFromList={handleRemoveFromList} />)
 
     const handleListChange = (e) => {
         setSelectedList(e.target.value)
         if(e.target.value === 'wishlist'){
-            setDisplayGames(allWishlists)
+            if(allWishlists.length > 0){
+                setDisplayGames(allWishlists)
+            }else{
+                setDisplayGames(<h3 style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 60}}>{user.username} has no games in their wishlist</h3>)
+            }
         }else if(e.target.value === 'reviews'){
-            setDisplayGames(allReviews)
+            if(allReviews.length > 0){
+                setDisplayGames(allReviews)
+            }else{
+                setDisplayGames(<h3 style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 60}}>{user.username} has not reviewed any games yet</h3>)
+            }
         }else if(e.target.value === 'default.list.829920'){
             setDisplayGames(<></>)
         }else{
@@ -58,7 +68,7 @@ function UserPage(){
                 const listGames = selectedList.games.map(game => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'wishlist'} handleRemoveFromList={handleRemoveFromList} />)
                 setDisplayGames(listGames)
             }else{
-                setDisplayGames(<h3 style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20}}>No games to display</h3>)
+                setDisplayGames(<h3 style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 60}}>There are no games in this list</h3>)
             }
         }
         
@@ -109,10 +119,20 @@ function UserPage(){
             }else{
                 res.json()
                 .then(errors => {
-                    alert(errors.errors)
+                    if(errors.errors[0] === 'Receiver has already been taken'){
+                        alert('You have already sent this user a friend request')
+                    }else{
+                        alert(errors.errors)
+                    }
                 })
             }
         })
+    }
+
+    const handleMessageClick = () => {
+        localStorage.setItem('userId', user.id)
+        localStorage.setItem('userUsername', user.username)
+        history('/messages')
     }
 
 
@@ -127,12 +147,14 @@ function UserPage(){
             <button className='nes-btn is-success' onClick={handleAddFriend}>Add Friend</button>
             }
             {user.friend_bool ? 
-            <button className='nes-btn is-primary'>Message</button>
+            <button className='nes-btn is-primary' onClick={handleMessageClick}>Message</button>
             :
             null
             }
             <br/>
             <br/>
+            <br/>
+            <p>View {user.username}'s lists:</p>
             <div className='nes-select is-success' style={{width: '30%', margin: 'auto'}}>
             <select value={selectedList} onChange={handleListChange}>
               <option value="default.list.829920">None</option>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :list_items, only: [:create, :index, :show, :destroy]
     resources :friendships, only: [:index, :create, :destroy]
     resources :friend_requests, only: [:show, :destroy, :create]
+    resources :messages, only: [:show, :create]
 
     get "/me", to: "users#me"
     post "/signup", to: "users#create"

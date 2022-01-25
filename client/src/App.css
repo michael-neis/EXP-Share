@@ -227,6 +227,7 @@ body {
 .game-container{
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 3%;
 }
 
 .game-card{
@@ -298,12 +299,79 @@ body {
   padding: 50px 0 0 0;
   color: white;
   text-align: center;
+  margin-bottom: 3%;
 }
 
 .user-page-img{
   border-radius: 100%;
   width: 18%;
 }
+
+
+.my-profile {
+  text-align: center;
+  color: white;
+  padding-top: 35px;
+  padding-bottom: 25px;
+  background-color: rgba(139, 148, 7, 0.315);
+  box-shadow: 5px 5px 4px hsla(115, 68%, 38%, 0.575);
+  width: 50%;
+  margin: 0 auto 3% auto
+}
+
+.my-profile img {
+  border-radius: 100%;
+  width: 60%;
+  height: 60vh;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+}
+
+.message-container {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+  color: white;
+}
+
+.message-container img{
+  border-radius: 100%;
+  margin: 0 6px 24px 6px;
+  width: 130px;
+  height: 130px;
+}
+
+.message-container time {
+  font-size: 8px;
+}
+
+.sent-message{
+  text-align: right;
+  /* margin-right: 10%; */
+}
+
+.received-message{
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

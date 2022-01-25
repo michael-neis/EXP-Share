@@ -2,7 +2,7 @@ import {useState} from 'react'
 import PicModal from './PicModal'
 import UserDataModal from './UserDataModal'
 
-function MyProfile({currentUser}){
+function MyProfile({currentUser, setCurrentUser}){
 
     const [pictureFormData, setPictureFormData] = useState(currentUser.profile_pic)
     const [userFormData, setUserFormData] = useState({
@@ -20,24 +20,24 @@ function MyProfile({currentUser}){
 
     const handlePicClose = () => {
         setShowPicModal(false)
-        if(!currentUser.profile_pic){
+        if(!picture || picture === ''){
             setPictureFormData('')
         }else{
-            setPictureFormData(currentUser.profile_pic)
+            setPictureFormData(picture)
         }
     }
 
     const handleUserClose = () => {
         setShowUserModal(false)
-        if(!currentUser.bio){
+        if(!userData.bio || userData.bio === ''){
             setUserFormData({
-                username: currentUser.username,
+                username: userData.username,
                 bio: ''
             })
         }else{
             setUserFormData({
-                username: currentUser.username,
-                bio: currentUser.bio
+                username: userData.username,
+                bio: userData.bio
             })
         }
     }
@@ -51,7 +51,7 @@ function MyProfile({currentUser}){
     }
 
     const handlePicClick = () => {
-        if(!currentUser.profile_pic){
+        if(!picture){
             setPictureFormData('')
         }
         handlePicShow()
@@ -84,6 +84,10 @@ function MyProfile({currentUser}){
                 .then(data => {
                     setPictureFormData(data.profile_pic)
                     setPicture(data.profile_pic)
+                    setCurrentUser({
+                        ...currentUser,
+                        profile_pic: data.profile_pic
+                    })
                     setShowPicModal(false)
                 })
             }else{
@@ -116,6 +120,11 @@ function MyProfile({currentUser}){
                         username: data.username,
                         bio: data.bio
                     })
+                    setCurrentUser({
+                        ...currentUser,
+                        username: data.username,
+                        bio: data.bio
+                    })
                     setShowUserModal(false)
                 })
             }else{
@@ -128,15 +137,15 @@ function MyProfile({currentUser}){
     }
 
     return(
-        <>
-            <img src={picture ? picture : 'http://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg'} style={{cursor: 'pointer'}} onClick={handlePicClick}/>
+        <div className="my-profile">
+            <img src={picture ? picture : 'http://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg'} onClick={handlePicClick}/>
             <h1>{userData.username}</h1>
             <h3>Bio:</h3>
             <p>{userData.bio ? userData.bio : "404 bio not found"}</p>
-            <button onClick={handleEditClick}>Edit</button>
+            <button className='nes-btn is-warning' onClick={handleEditClick}>Edit</button>
             <PicModal handlePicClose={handlePicClose} showPicModal={showPicModal} handlePicSubmit={handlePicSubmit} pictureFormData={pictureFormData} setPictureFormData={setPictureFormData}/>
             <UserDataModal handleUserClose={handleUserClose} showUserModal={showUserModal} handleUserSubmit={handleUserSubmit} userFormData={userFormData} setUserFormData={setUserFormData}/>
-        </>
+        </div>
     )
 }
 

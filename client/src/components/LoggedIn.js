@@ -9,6 +9,7 @@ import Friends from "./Friends"
 import SearchUsers from "./SearchUsers"
 import MyProfile from "./MyProfile";
 import UserPage from './UserPage'
+import Messages from './Messages'
 
 
 function LoggedIn({ setCurrentUser, currentUser }){
@@ -25,8 +26,9 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/lists' element={<MyLists currentUser={currentUser}/>} />
                 <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
                 <Route path='/search_users' element={<SearchUsers currentUser={currentUser}/>} />
-                <Route path='/my_profile' element={<MyProfile currentUser={currentUser}/>} />
+                <Route path='/my_profile' element={<MyProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
                 <Route path='/user' element={<UserPage currentUser={currentUser}/>} />
+                <Route path='/messages' element={<Messages currentUser={currentUser}/>} />
             </Routes>
             </div>
         </>

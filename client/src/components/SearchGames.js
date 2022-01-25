@@ -52,7 +52,7 @@ function SearchGames(){
             <form onSubmit={handleSubmit} autoComplete='off'>
                 <h2>Search by Title:</h2>
                 <label>
-                    <input type="text" name="name" value={searchTitle} onChange={handleChange} style={{height: '40px'}}/>
+                    <input className='nes-input is-dark' type="text" name="name" value={searchTitle} onChange={handleChange} />
                 </label>
                 <button className="nes-btn is-success" type='submit' style={{fontSize: '14px'}}>Search</button>
             </form>

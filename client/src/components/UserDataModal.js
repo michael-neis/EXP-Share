@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 function UserDataModal({showUserModal, handleUserClose, setUserFormData, userFormData, handleUserSubmit}){
@@ -14,35 +13,23 @@ function UserDataModal({showUserModal, handleUserClose, setUserFormData, userFor
     return(
     <>
     <Modal show={showUserModal} onHide={handleUserClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
             <Modal.Title>Profile Details</Modal.Title>
         </Modal.Header>
         <Form onSubmit={(e) => handleUserSubmit(e)}>
             <Form.Group style={{padding: 10}} onChange={handleChange}>
                     <Form.Label htmlFor="username" style={{marginTop: 5, marginLeft: 10}}>Username:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        id="username"
-                        aria-describedby="usernameBlock"
-                        value={userFormData.username}
-                        onChange={handleChange}
-                    />
+                    <input autoComplete='off' type="text" id="username" className="nes-input" placeholder="Username" value={userFormData.username} onChange={handleChange} label="Username" style={{marginBottom: 40}}></input>
                     <Form.Label htmlFor="bio" style={{marginTop: 5, marginLeft: 10}}>Bio:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        id="bio"
-                        aria-describedby="bioBlock"
-                        value={userFormData.bio}
-                        onChange={handleChange}
-                    />
+                    <input autoComplete='off' type="text" id="bio" className="nes-input" placeholder="Bio" value={userFormData.bio} onChange={handleChange} label="Bio" style={{marginBottom: 40}}></input>
             </Form.Group>   
         <Modal.Footer>
-            <Button onClick={handleUserClose}>
+            <button className='nes-btn' type='button' onClick={handleUserClose}>
                 Cancel
-            </Button>
-            <Button variant="success" type='submit'>
+            </button>
+            <button className='nes-btn is-success' type='submit'>
                 Save
-            </Button>
+            </button>
         </Modal.Footer>
         </Form>
     </Modal>

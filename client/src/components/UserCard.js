@@ -31,7 +31,11 @@ function UserCard({user}){
             }else{
                 res.json()
                 .then(errors => {
-                    alert(errors.errors)
+                    if(errors.errors[0] === 'Receiver has already been taken'){
+                        alert('You have already sent this user a friend request')
+                    }else{
+                        alert(errors.errors)
+                    }
                 })
             }
         })

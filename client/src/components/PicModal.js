@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 function PicModal({showPicModal, handlePicClose, setPictureFormData, pictureFormData, handlePicSubmit}){
@@ -12,12 +11,12 @@ function PicModal({showPicModal, handlePicClose, setPictureFormData, pictureForm
     return(
     <>
     <Modal show={showPicModal} onHide={handlePicClose}>
-        <Modal.Header closeButton>
+        <Modal.Header >
             <Modal.Title>Set Profile Picture</Modal.Title>
         </Modal.Header>
         <Form onSubmit={(e) => handlePicSubmit(e)}>
             <Form.Group style={{padding: 10}} onChange={handleChange}>
-                    <Form.Label htmlFor="image" style={{marginTop: 5, marginLeft: 10}}>Image URL:</Form.Label>
+                    <Form.Label htmlFor="image" style={{marginTop: 5, marginLeft: 10}}>Profile Picture:</Form.Label>
                     <Form.Control
                         type="text"
                         id="image"
@@ -25,14 +24,15 @@ function PicModal({showPicModal, handlePicClose, setPictureFormData, pictureForm
                         value={pictureFormData}
                         onChange={handleChange}
                     />
+                    {/* <input type="text" id="image" className="nes-input" placeholder="Image URL" value={pictureFormData} onChange={handleChange} label="Image" style={{marginBottom: 20}}></input> */}
             </Form.Group>   
         <Modal.Footer>
-            <Button onClick={handlePicClose}>
+            <button className='nes-btn' type='button' onClick={handlePicClose}>
                 Cancel
-            </Button>
-            <Button variant="success" type='submit'>
+            </button>
+            <button className='nes-btn is-success' type='submit'>
                 Save
-            </Button>
+            </button>
         </Modal.Footer>
         </Form>
     </Modal>

@@ -64,13 +64,7 @@ function ReviewForm({game, handleClose, showReviewModal, handleSubmit, formData,
             <Rating name="customized-10" value={formData.rating} max={10} />
             <br/>
                     <Form.Label htmlFor="title" style={{marginTop: 5, marginLeft: 10}}>Comment:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        id="title"
-                        aria-describedby="titleBlock"
-                        value={formData.comment}
-                        onChange={handleChange}
-                    />
+                    <input autoComplete='off' type="text" id="comment" className="nes-input" placeholder="Comment" value={formData.comment} onChange={handleChange} label="Username" style={{marginBottom: 40}}></input>
             </Form.Group>   
         <Modal.Footer>
             {review ? <button className='nes-btn is-error' style={{fontSize: '11px'}} onClick={handleDeleteModal}>

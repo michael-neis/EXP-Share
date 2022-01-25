@@ -8,7 +8,10 @@
 }
 
 .friend-card img {
-  width: 60%;
+  height: auto;
+  max-height: 200px;
+  width: auto;
+  max-width: 200px;
   border-radius: 100%;
 }
 
@@ -296,10 +299,10 @@ body {
 }
 
 .user-page{
-  padding: 50px 0 0 0;
+  padding: 20px 0 20px 0;
   color: white;
   text-align: center;
-  margin-bottom: 3%;
+  margin: 0 auto 1% auto;
 }
 
 .user-page-img{
@@ -313,8 +316,8 @@ body {
   color: white;
   padding-top: 35px;
   padding-bottom: 25px;
-  background-color: rgba(139, 148, 7, 0.315);
-  box-shadow: 5px 5px 4px hsla(115, 68%, 38%, 0.575);
+  background-color: rgba(8, 11, 51, 0.747);
+  box-shadow: 5px 5px 4px hsla(261, 80%, 18%, 0.795);
   width: 50%;
   margin: 0 auto 3% auto
 }
@@ -328,9 +331,14 @@ body {
 
 .message-container {
   width: 70%;
-  margin: auto;
+  margin: 0 auto 3% auto;
   text-align: center;
+  padding: 8px 10px 8px 10px;
   color: white;
+  background-color: #212529;
+  box-shadow: 5px 5px 4px hsla(0, 40%, 31%, 0.575);
+  max-height: 80vh;
+  overflow : auto;
 }
 
 .message-container img{
@@ -351,6 +359,24 @@ body {
 
 .received-message{
   text-align: left;
+}
+
+.received-message img:hover{
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+}
+
+.message-input-container{
+  position: sticky;
+  bottom: 0;
+}
+
+.message-input{
+  display: flex;
+  justify-content: center;
+}
+
+.message-input input{
+  width: 70%;
 }
 
 

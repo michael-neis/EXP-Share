@@ -153,6 +153,8 @@ function UserPage(){
             }
             <br/>
             <br/>
+            <h2>Bio:</h2>
+            <p>{user.bio ? user.bio : '404 Bio not found'}</p>
             <br/>
             <p>View {user.username}'s lists:</p>
             <div className='nes-select is-success' style={{width: '30%', margin: 'auto'}}>

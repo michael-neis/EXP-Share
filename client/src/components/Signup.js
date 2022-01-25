@@ -71,7 +71,7 @@ function Signup({ setCurrentUser }) {
           </h3>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           
-                <input type="text" id="username" className="nes-input is-dark" placeholder="Username" value={formData.username}
+                <input autoComplete='off' type="text" id="username" className="nes-input is-dark" placeholder="Username" value={formData.username}
                 onChange={(e) => handleChange(e)} label="Username" style={{marginBottom: 40}}></input>
     
                 <input type="password" id="password" className="nes-input is-dark" placeholder="Password" value={formData.password}

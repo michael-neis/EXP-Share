@@ -37,14 +37,18 @@ function SearchUsers(){
 
     return(
         <div>
+        <div className="game-search">
             <form onSubmit={handleSubmit}>
+            <h2>Search by Username:</h2>
             <label>
-                Username:
-                <input type="text" name="name" value={searchForm} onChange={(e) => setSearchForm(e.target.value)}/>
+                <input autoComplete='off' className="nes-input is-dark" placeholder="Username" type="text" name="name" value={searchForm} onChange={(e) => setSearchForm(e.target.value)} style={{height: '40px'}}/>
             </label>
-                <input type="submit" value="Submit" />
+            <button className="nes-btn is-success" type='submit' style={{fontSize: '14px'}}>Search</button>
             </form>
+        </div>
+        <div className="friend-container">
             <UserCard user={user}/>
+        </div>
         </div>
     )
 }

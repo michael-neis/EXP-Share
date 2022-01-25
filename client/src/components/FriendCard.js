@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-// import Button from 'react-bootstrap/Button'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,18 +27,20 @@ function FriendCard({friend, handleRemoveFriend}){
     }
 
     return(
-        <div className="friendCard">
+        <div className="friend-card">
+            <img alt='friend profile' src={friend.profile_pic ? friend.profile_pic : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'}/>
             <h1 onClick={handleFriendClick}>{friend.username}</h1>
-            <button className="nes-btn is-warning" onClick={handleRemoveModal}>Remove Friend</button>
+            <button className="nes-btn is-error" onClick={handleRemoveModal}>Remove Friend</button>
+            <button className="nes-btn is-primary">Message</button>
             <Modal show={showRemove} onHide={handleRemoveClose}>
-                <Modal.Header closeButton>
+                <Modal.Header >
                 <Modal.Title>Are you sure you wish to remove {friend.username} as a friend?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <button variant="secondary" onClick={handleRemoveClose}>
+                <button className='nes-btn' onClick={handleRemoveClose}>
                     Cancel
                 </button>
-                <button onClick={handleRemoveClick} style={{float: 'right'}}>
+                <button className='nes-btn is-error' onClick={handleRemoveClick} style={{float: 'right'}}>
                     Remove
                 </button>
                 </Modal.Body>

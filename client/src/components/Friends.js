@@ -100,18 +100,19 @@ function Friends({ currentUser }){
         })
     }
 
-    const displayRequests = requests.map(req => <FriendRequest key={req.id} req={req} handleAccept={handleAccept} handleReject={handleReject}/>)
+    const displayRequests = requests.length === 0 ? <h3 style={{color: 'white', marginTop: 20}}>No pending requests</h3> : requests.map(req => <FriendRequest key={req.id} req={req} handleAccept={handleAccept} handleReject={handleReject}/>)
     const displayFriends = friends.map(friend => <FriendCard key={friend.username} friend={friend} handleRemoveFriend={handleRemoveFriend}/>)
 
     return(
-        <>
-        <div className="friend-container">
+        <div>
+        <div className="friend-buttons">
             <button className="nes-btn is-primary" onClick={() => setRequestBool(false)}>Friends</button>
             <button className="nes-btn is-success" onClick={handleShowRequests}>Friend Requests</button>
         </div>
+        <div className="friend-container">
             {requestBool ? displayRequests : displayFriends}
-        
-        </>
+        </div>
+        </div>
     )
 }
 

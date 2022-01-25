@@ -5,7 +5,9 @@ class Api::FriendRequestsController < ApplicationController
         if params[:receiver_id] == current_user.id
             render json: {errors: "You can't send a request to yourself"}, status: :forbidden
         elsif current_user.friend_ids.include?(params[:receiver_id])
-            render json: {errors: "You are already friends"}
+            render json: {errors: "You are already friends"}, status: :forbidden
+        elsif FriendRequest.find_by(sender_id: params[:receiver_id], receiver_id: current_user.id)
+            render json: {errors: "This user has sent you a friend request already"}, status: :forbidden
         else
             new_request = FriendRequest.create!(sender_id: current_user.id, receiver_id: params[:receiver_id])
             render json: new_request, status: :created

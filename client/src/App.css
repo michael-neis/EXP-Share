@@ -1,10 +1,36 @@
-.friendCard {
-  text-align: center;
+.friend-card {
+  color: white;
+  background-color: rgba(29, 45, 75, 0.884);
+  width: 45%;
+  margin: 50px auto 0 auto;
+  padding: 10px 0 10px 0;
+  box-shadow: 5px 5px 4px hsla(165, 66%, 57%, 0.575);
 }
 
-button {
-  cursor: pointer;
+.friend-card img {
+  width: 60%;
+  border-radius: 100%;
 }
+
+.friend-card h1:hover{
+  color: rgb(0, 255, 55);
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+}
+
+.friend-request{
+  color: white
+}
+
+.friend-request img{
+  border-radius: 100%;
+  width: 8%;
+  height: 8%;
+  margin-right: 10px;
+}
+
+.friend-request a:hover{
+  color: rgb(39, 218, 39) !important
+} 
 
 .login-buttons{
   position: absolute;
@@ -32,13 +58,6 @@ button {
   animation: color-change 7s infinite;
 }
 
-/* .home-page{
-  background-image: url('https://wallpapercave.com/wp/wp4162395.jpg');
-  background-size: cover;
-   min-width: 100%;
-   min-height: 100%;
-} */
-
 body {
   background-image: url('https://wallpapercave.com/wp/wp4162395.jpg');
   background-attachment: fixed;
@@ -52,14 +71,17 @@ body {
 
 .friend-container {
   text-align: center;
-  /* justify-content: space-around; */
-  /* display: flex; */
+  margin: 0 auto 5% auto;
 }
 
+.friend-buttons{
+  text-align: center;
+}
 
-.friend-container button {
+.friend-buttons button{
   margin: 0 8% 2% 8%
 }
+
 
 .ref-ul {
   position: absolute;
@@ -127,7 +149,7 @@ body {
 }
 
 .header{
-  margin-top: 3%;
+  margin-top: 2%;
   padding: 0 15px 0 10px;
 }
 
@@ -255,7 +277,8 @@ body {
 .game-details img{
   float:left;
   width: 32%;
-  margin: 0 2% 2% 5%
+  margin: 0 2% 2% 5%;
+  box-shadow: 5px 5px 4px hsla(271, 66%, 57%, 0.575);
 }
 
 .game-details button{
@@ -270,6 +293,18 @@ body {
   text-align: center;
   color: white;
 }
+
+.user-page{
+  padding: 50px 0 0 0;
+  color: white;
+  text-align: center;
+}
+
+.user-page-img{
+  border-radius: 100%;
+  width: 18%;
+}
+
 
 
 

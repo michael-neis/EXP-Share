@@ -125,7 +125,7 @@ function MyLists({currentUser}){
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if(selectedList){
+    if(selectedList !== 'default.list.829920'){
     const configObj = {
       method: "PATCH",
       headers: {
@@ -163,8 +163,13 @@ function MyLists({currentUser}){
         if(res.ok){
           res.json()
           .then(data => {
+            console.log(data)
             setLists([...lists, data])
             setShowListModal(false)
+            setSelectedList(data.id)
+            setListGames(data.list_items)
+            setListDesc('list')
+            setListName(data.list_name)
           })
         }else{
           res.json()
@@ -193,7 +198,7 @@ function MyLists({currentUser}){
   }
 
   const handleNewListClick = () => {
-    setSelectedList(null)
+    setSelectedList('default.list.829920')
     setFormData({
       user_id: currentUser.id,
       list_name: '',
@@ -212,7 +217,7 @@ function MyLists({currentUser}){
   let displayGames = null
 
   if(listDesc === 'list' && listGames.length === 0){
-    displayGames = <h1>No games in list</h1>
+    displayGames = <h1 style={{marginLeft: 'auto', marginRight: 'auto', marginTop: 30}}>No games in list</h1>
   }else if(listDesc === 'list'){
     displayGames = listGames.map(game => <ListGameCard key={game.id} itemId={game.id} game={game.game} listDesc={listDesc} handleRemoveFromList={handleRemoveFromList}/>)
   }else{
@@ -222,16 +227,21 @@ function MyLists({currentUser}){
     return(
         <div className='all-lists'>
           <h2>My Lists</h2>
+          <div className='nes-select is-success' style={{width: '30%', margin: 'auto'}}>
             <select value={selectedList} onChange={handleListChange}>
               <option value="default.list.829920">Select a List</option>
               <option id='reviews' value='reviews'>Reviews</option>
               <option id='wishlist' value='wishlist'>Wishlist</option>
               {displayLists}
             </select>
+            </div>
             <br/>
-            <button onClick={handleNewListClick}>New List</button>
+            <br/>
+            <button className='nes-btn is-success' onClick={handleNewListClick}>New List</button>
+            <br/>
+            <br/>
             <h1>{listName}</h1>
-            {listDesc === 'list' ? <button onClick={handleEditClick}>Edit List</button> : null}
+            {listDesc === 'list' ? <button className='nes-btn is-warning' onClick={handleEditClick} style={{fontSize: 10}}>Edit List</button> : null}
             <div className="game-container">
               {displayGames}
             </div>

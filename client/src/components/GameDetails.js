@@ -288,7 +288,7 @@ function GameDetails({currentUser}){
             {game && game.total_rating ? <h3 style={{marginTop: 40}}>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
             <br/>
             {review ?
-            <h3>My Rating:</h3>
+            <h3>My Review:</h3>
             :
             null
             }
@@ -298,7 +298,7 @@ function GameDetails({currentUser}){
             null
             }
             {review ?
-            <h4>"{review.comment}"</h4>
+            <h4>{review.comment}</h4>
             :
             null
             }
@@ -317,7 +317,7 @@ function GameDetails({currentUser}){
             {/* <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/> */}
             <br/>
             <h4>Add to List:</h4>
-            <select value={selectedList} onChange={handleListChange} style={{fontSize: '19px'}}>
+            <select value={selectedList} onChange={handleListChange} style={{fontSize: '19px', height: '34px'}}>
                 <option value="default.list.101783">Select a List</option>
                 {listNames}
             </select>

@@ -1,5 +1,4 @@
 import { Modal } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react';
 
@@ -41,20 +40,23 @@ function ListForm({handleClose, showListModal, handleSubmit, formData, setFormDa
     return(
         <>
     <Modal show={showDelete} onHide={handleDeleteClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Are you sure you wish to delete this list?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Button variant="secondary" onClick={handleDeleteClose}>
+          <button className='nes-btn' onClick={handleDeleteClose}>
             Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDeleteClick} style={{float: 'right'}}>
+          </button>
+          <button className='nes-btn is-error' onClick={handleDeleteClick} style={{float: 'right'}}>
             Delete
-          </Button>
+          </button>
         </Modal.Body>
     </Modal>
 
     <Modal show={showListModal} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>{list === 'default.list.829920' ? 'Create List' : 'Edit List'}</Modal.Title>
+        </Modal.Header>
         <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group style={{padding: 10}} onChange={handleChange}>
             <br/>
@@ -65,22 +67,21 @@ function ListForm({handleClose, showListModal, handleSubmit, formData, setFormDa
                         aria-describedby="titleBlock"
                         value={formData.list_name}
                         onChange={handleChange}
+                        style={{marginBottom: 8}}
                     />
-                    <Form.Check 
-                        type="switch"
-                        id="custom-switch"
-                        label="Public"
-                        checked={formData.public}
-                        onChange={handleChange}
-                    />
+                    <br/>
+                    <label>
+                    <input type="checkbox" className="nes-checkbox" checked={formData.public} onChange={handleChange}/>
+                    <span>Public</span>
+                    </label>
             </Form.Group>   
         <Modal.Footer>
-            {list ? <Button variant="danger" onClick={handleDeleteModal}>
+            {list !== 'default.list.829920' ? <button className='nes-btn is-error' onClick={handleDeleteModal}>
                 Remove
-            </Button> : null}
-            <Button variant="success" type='submit'>
+            </button> : null}
+            <button className='nes-btn is-success' type='submit'>
                 Submit
-            </Button>
+            </button>
         </Modal.Footer>
         </Form>
     </Modal>

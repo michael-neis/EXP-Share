@@ -6,7 +6,9 @@ class Api::MessagesController < ApplicationController
         elsif current_user.friend_ids.include?(params[:id].to_i)
             sent_messages = Message.where(sender_id: current_user.id, receiver_id: params[:id])
             received_messages = Message.where(sender_id: params[:id], receiver_id: current_user.id)
-            total_messages = received_messages + sent_messages
+            r_suggestions = Suggestion.where(receiver_id: current_user.id, sender_id: params[:id])
+            s_suggestions = Suggestion.where(receiver_id: params[:id], sender_id: current_user.id)
+            total_messages = received_messages + sent_messages + s_suggestions + r_suggestions
             sorted = total_messages.sort_by{|m| m[:created_at]}
             render json: sorted, status: :ok
         else

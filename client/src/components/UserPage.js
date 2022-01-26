@@ -20,7 +20,6 @@ function UserPage(){
             if(res.ok){
                 res.json()
                 .then(data => {
-                    console.log(data)
                     const publicLists = data.lists.filter(list => list.public === true)
                     const listNames = publicLists.map(list => <option id={list.id} value={list.id} key={list.id}>{list.list_name}</option>)
                     setUser(data)

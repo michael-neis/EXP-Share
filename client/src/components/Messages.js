@@ -25,7 +25,7 @@ function Messages({currentUser}){
         })
     }, [])
 
-    const displayMessages = allMessages.map(message => <MessageCard key={message.id} message={message} currentUser={currentUser}/>)
+    const displayMessages = allMessages.map(message => <MessageCard key={message.created_at} message={message} currentUser={currentUser}/>)
 
     const handleChange = (e) => {
         setMessageText(e.target.value)

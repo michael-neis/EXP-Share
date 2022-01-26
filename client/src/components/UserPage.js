@@ -35,7 +35,19 @@ function UserPage(){
     }, [])
 
     if(!user){
-        return(<h2 style={{color: 'white'}}>Loading...</h2>)
+        return(
+        <div className="game-container">
+        <div style={{margin: 'auto', color: 'white'}}>
+            <p>Loading...</p>
+            <div className="field">
+                <div className="net"></div>
+                <div className="ping"></div>
+                <div className="pong"></div>
+                <div className="ball"></div>
+            </div>
+        </div>
+        </div>
+        )
     }
 
     const handleRemoveFromList = () => {

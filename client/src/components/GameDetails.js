@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import ReviewForm from './ReviewForm'
 import 'react-dropdown/style.css';
 import SuggestForm from './SuggestForm';
+import ReviewCard from './ReviewCard';
 
 function GameDetails({currentUser}){
 
@@ -22,6 +23,8 @@ function GameDetails({currentUser}){
     const [selectedList, setSelectedList] = useState('default.list.101783')
     const [gameRubyId, setGameRubyId] = useState(null)
     const [showSuggestForm, setShowSuggestForm] = useState(false)
+    const [genres, setGenres] = useState([])
+    const [reviews, setReviews] = useState([])
 
     const gameId = localStorage.getItem('gameId')
     
@@ -39,6 +42,8 @@ function GameDetails({currentUser}){
             .then(res => res.json())
             .then(data =>{
                  setGame(data.game)
+                 setGenres(data.game.genres)
+                 setReviews(data.review_array)
                  setGameExists(true)
                  setReview(data.review)
                  setWishlist(data.wishlist)
@@ -67,7 +72,19 @@ function GameDetails({currentUser}){
     }, [])
 
     if (!gameExists) {
-        return <div>Loading...</div>;
+        return(
+        <div className="game-container">
+        <div style={{margin: 'auto', color: 'white'}}>
+            <p>Loading...</p>
+            <div className="field">
+                <div className="net"></div>
+                <div className="ping"></div>
+                <div className="pong"></div>
+                <div className="ball"></div>
+            </div>
+        </div>
+        </div>
+        )
     }
 
     const handleClose = () => {
@@ -98,6 +115,8 @@ function GameDetails({currentUser}){
                 if(res.ok){
                     res.json().then((data) => {
                         setReview(data)
+                        const updated = reviews.map((rev => rev.id === data.id ? data : rev))
+                        setReviews(updated)
                         if(data.comment){
                             setFormData({
                                 rating: data.rating,
@@ -145,6 +164,11 @@ function GameDetails({currentUser}){
                 if(res.ok){
                     res.json().then((data) => {
                         setReview(data)
+                        if(reviews){
+                            setReviews([...reviews, data])
+                        }else{
+                            setReviews([data])
+                        }
                         if(data.comment){
                             setFormData({
                                 rating: data.rating,
@@ -179,6 +203,8 @@ function GameDetails({currentUser}){
         fetch(`/api/reviews/${review.id}`, { method: 'DELETE' }).then(res => {
             if (res.ok) {
                 setReview(null)
+                const deleted = reviews.filter(r => r.id !== review.id)
+                setReviews(deleted)
                 setFormData({
                     rating: 0,
                     comment: ''
@@ -289,12 +315,23 @@ function GameDetails({currentUser}){
     }
  
     const listNames = listOptions.map((option) => <option value={option.list_name} key={option.list_name}>{option.list_name}</option>)
+    const displayGenres = genres.map((genre) => genre.name).join(', ')
+
+    let displayReviews
+
+    if(reviews){
+        displayReviews = reviews.map((review) => <ReviewCard key={review.id} review={review} currentUser={currentUser}/>)
+    }else{
+        displayReviews = null
+    }
 
     return(
+        <div>
         <div className="game-details">
             <h1 style={{marginBottom: 20}}>{game.name}</h1>
             <img alt={game.name} src={game.cover && game.cover.image_id ? `https://images.igdb.com/igdb/image/upload/t_1080p/${game.cover.image_id}.jpg` : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png'} className="detailPhoto"/>
-            {game && game.total_rating ? <h3 style={{marginTop: 40}}>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
+            <h3 style={{marginTop: 40}}>{displayGenres}</h3>
+            {game && game.total_rating ? <h3 style={{marginTop: 15}}>Average Rating: {game.total_rating.toFixed(1)}</h3> : null}
             <br/>
             {review ?
             <h3>My Review:</h3>
@@ -323,7 +360,6 @@ function GameDetails({currentUser}){
             <button style={{marginTop: '10px'}} className='nes-btn is-success' onClick={handleAddToWishlist}>Add to wishlist</button>
             }
             <br/>
-            {/* <Dropdown options={listNames} onChange={handleListChange} value={selectedList} placeholder="Select an option"/> */}
             <br/>
             <h4>Add to List:</h4>
             <select value={selectedList} onChange={handleListChange} style={{fontSize: '19px', height: '34px'}}>
@@ -339,11 +375,16 @@ function GameDetails({currentUser}){
             {game.summary ? <h5>Game Summary:</h5> : null}
             {game.summary ? <p>{game.summary}</p> : null}
 
-
-
             <ReviewForm handleClose={handleClose} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
 
             <SuggestForm handleClose={handleSuggestClose} game={game} showSuggestForm={showSuggestForm} currentUser={currentUser}/>
+        </div>
+        <div>
+            <h1 style={{ marginTop: 64, marginBottom: -30, color: 'white', textAlign: 'center'}}>Reviews</h1>
+            <div className="review-container">
+                {reviews && reviews.length > 0 ? displayReviews : <h3>No reviews yet</h3>}
+            </div>
+        </div>
         </div>
     )
 }

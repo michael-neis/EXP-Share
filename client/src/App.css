@@ -434,7 +434,27 @@ body {
 }
 
 
+.review-container{
+  margin: 3% 6% 3% 6%;
+  text-align: center;
+  padding: 8px 10px 8px 10px;
+  color: white;
+  background-color: rgba(25, 26, 41, 0.89);
+  box-shadow: 5px 5px 4px hsla(271, 66%, 57%, 0.575);
+  max-height: 50vh;
+  overflow : auto;
+}
 
+.review-container img{
+  border-radius: 100%;
+  margin: 0 6px 24px 6px;
+  width: 100px;
+  height: 100px;
+}
+
+.review-container time {
+  font-size: 8px;
+}
 
 
 
@@ -742,4 +762,196 @@ body {
   .modal-fullscreen-xxl-down .modal-footer {
     border-radius: 0;
   }
+}
+
+
+
+
+
+
+
+
+/* ---------For the pong animation----------- */
+
+.field {
+	margin: 5% auto 0 auto;
+	width: 280px;
+	height: 160px;
+	position: relative;
+	
+	border-width: 3px;
+	border-style: solid;
+	border-color: white;
+}
+
+.net {
+  width: 0;
+  height: 95%;
+  
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  border-width: 3px;
+  border-style: dotted;
+  border-color: white;
+}
+	
+	.ping, .pong {
+		width: 4px;
+		height: 16px;
+		
+		position: absolute;
+		
+		background-color: white;
+	}
+	
+	.ping {
+		left: 6%;
+		animation: ping 6s infinite linear;
+	}
+	
+	.pong {
+		right: 6%;
+		animation: pong 6s infinite linear;
+	}
+	
+	.ball {
+		width: 5px;
+		height: 5px;
+		
+		position: absolute;
+		background-color: white;
+		
+		animation: ball 6s infinite linear;
+	}
+
+
+
+@keyframes ball {
+	0% {
+		top: 34%;
+		left: 52%;
+	}
+	8.3% {
+		top: 52%;
+		left: 90%;
+	}
+	24.9% {
+		top: 85%;
+		left: 8%;
+	}
+	30% {
+		top: 98%;
+		left: 27%;
+	}
+	41.5% {
+		top: 70%;
+		left: 90%;
+	}
+	58.1% {
+		top: 55%;
+		left: 8%;
+	}
+	74.7% {
+		top: 13%;
+		left: 90%;
+	}
+	79% {
+		top: 1%;
+		left: 70%;
+	}
+	91.3% {
+		top: 22%;
+		left: 8%;
+	}
+	100% {
+		top: 34%;
+		left: 52%;
+	}
+}
+
+@keyframes ping {
+	0% {
+		top: 10%;
+	}
+	5% {
+		top: 10%;
+	}
+	9% {
+		top: 24%;
+	}
+	13% {
+		top: 17%;
+	}
+	24.9% {
+		top: 82%;
+	}
+	47% {
+		top: 37%;
+	}
+	52% {
+		top: 41%;
+	}
+	56% {
+		top: 64%;
+	}
+	58.1% {
+		top: 54%;
+	}
+	70% {
+		top: 74%;
+	}
+	84% {
+		top: 12%;
+	}
+	91.3% {
+		top: 18%;
+	}
+	100% {
+		top: 10%;
+	}
+}
+
+@keyframes pong {
+	0% {
+		top: 90%;
+	}
+	8.3% {
+		top: 51%;
+	}
+	20% {
+		top: 60%;
+	}
+	25% {
+		top: 34%;
+	}
+	41.5% {
+		top: 68%;
+	}
+	46% {
+		top: 36%;
+	}
+	52% {
+		top: 18%;
+	}
+	58.1% {
+		top: 53%;
+	}
+	66% {
+		top: 14%;
+	}
+	70% {
+		top: 20%;
+	}
+	74.7% {
+		top: 10%;
+	}
+	91.3% {
+		top: 10%;
+	}
+	100% {
+		top: 90%;
+	}
 }

@@ -54,6 +54,7 @@ class Api::GamesController < ApplicationController
         if game
             review = Review.find_by(user_id: current_user.id, game_id: game.id)
             wishlist = Wishlist.find_by(user_id: current_user.id, game_id: game.id)
+            review_array = game.reviews
             db_id = game.id
         end
 
@@ -66,14 +67,84 @@ class Api::GamesController < ApplicationController
               "Client-ID" => "#{ENV['client_id_token']}",
               "Authorization" => "#{ENV['authorization_bearer_token']}"
             },
-            :body => "fields name, cover.image_id, total_rating, summary; where id = #{game_id};"
+            :body => "fields name, cover.image_id, total_rating, summary, genres.name; where id = #{game_id};"
           )
 
           api_game = JSON.parse(response.body)
 
-          render json: {game: api_game[0], review: review, wishlist: wishlist, lists: lists, db_id: db_id}, status: :ok
+          render json: {game: api_game[0], review: review, wishlist: wishlist, lists: lists, db_id: db_id, review_array: review_array}, status: :ok
     end
 
+    
+    def discover
+        if current_user.reviews.length == 0
+            render json: {message: 'no reviews'}, status: :ok
+        elsif current_user.top_games.length < 6
+
+            all_games = []
+            reviewed_games = current_user.reviews.map{|r| r.game.api_id}
+
+            current_user.top_games.each do |g|
+
+            top_game_id = g.game.api_id
+
+            response = HTTParty.post("https://api.igdb.com/v4/games",
+
+                :headers => {
+                  "Content-Type" => "text/plain",
+                  "Client-ID" => "#{ENV['client_id_token']}",
+                  "Authorization" => "#{ENV['authorization_bearer_token']}"
+                },
+                :body => "fields similar_games.name, similar_games.cover.image_id; where id = #{top_game_id};"
+              )
+              
+              res_hash = JSON.parse(response.body)[0]
+              game_array = res_hash["similar_games"]
+
+              game_array.each{|g| all_games << g}
+
+            end
+          
+            no_reviewed_games = all_games.filter{|g| reviewed_games.exclude?(g["id"])}
+            no_duplicates = no_reviewed_games.uniq
+            sample_games = no_duplicates.sample(16)
+            render json: sample_games, status: :ok
+
+        else
+
+            sample_top_games = current_user.top_games.sample(5)
+
+            all_games = []
+            reviewed_games = current_user.reviews.map{|r| r.game.api_id}
+
+            sample_top_games.each do |g|
+
+            top_game_id = g.game.api_id
+
+            response = HTTParty.post("https://api.igdb.com/v4/games",
+
+                :headers => {
+                  "Content-Type" => "text/plain",
+                  "Client-ID" => "#{ENV['client_id_token']}",
+                  "Authorization" => "#{ENV['authorization_bearer_token']}"
+                },
+                :body => "fields similar_games.name, similar_games.cover.image_id; where id = #{top_game_id};"
+              )
+              
+              res_hash = JSON.parse(response.body)[0]
+              game_array = res_hash["similar_games"]
+   
+              game_array.each{|g| all_games << g}
+
+            end
+          
+            no_reviewed_games = all_games.filter{|g| reviewed_games.exclude?(g["id"])}
+            no_duplicates = no_reviewed_games.uniq
+            sample_games = no_duplicates.sample(16)
+            render json: sample_games, status: :ok
+
+        end
+    end
 
     private
 

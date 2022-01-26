@@ -29,4 +29,11 @@ class User < ApplicationRecord
     def friend_ids
         self.friends.map{|f| f.id}
     end
+
+    def top_games
+        reviewed_games = self.reviews
+
+        highest_rating = reviews.max_by{|review| review.rating}.rating
+        best_games = reviews.filter{|review| review.rating == highest_rating}
+    end
 end

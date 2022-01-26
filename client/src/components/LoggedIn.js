@@ -10,6 +10,7 @@ import SearchUsers from "./SearchUsers"
 import MyProfile from "./MyProfile";
 import UserPage from './UserPage'
 import Messages from './Messages'
+import Suggestions from "./Suggestions";
 
 
 function LoggedIn({ setCurrentUser, currentUser }){
@@ -29,6 +30,7 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/my_profile' element={<MyProfile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
                 <Route path='/user' element={<UserPage currentUser={currentUser}/>} />
                 <Route path='/messages' element={<Messages currentUser={currentUser}/>} />
+                <Route path='/suggestions' element={<Suggestions currentUser={currentUser}/>} />
             </Routes>
             </div>
         </>

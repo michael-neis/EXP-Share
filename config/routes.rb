@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :friendships, only: [:index, :create, :destroy]
     resources :friend_requests, only: [:show, :destroy, :create]
     resources :messages, only: [:show, :create]
+    resources :suggestions, only: [:index, :create]
 
     get "/me", to: "users#me"
     post "/signup", to: "users#create"

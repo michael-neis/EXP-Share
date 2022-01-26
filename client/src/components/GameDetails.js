@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import ReviewForm from './ReviewForm'
 import 'react-dropdown/style.css';
+import SuggestForm from './SuggestForm';
 
 function GameDetails({currentUser}){
 
@@ -20,6 +21,7 @@ function GameDetails({currentUser}){
     const [listOptions, setListOptions] = useState([])
     const [selectedList, setSelectedList] = useState('default.list.101783')
     const [gameRubyId, setGameRubyId] = useState(null)
+    const [showSuggestForm, setShowSuggestForm] = useState(false)
 
     const gameId = localStorage.getItem('gameId')
     
@@ -71,6 +73,10 @@ function GameDetails({currentUser}){
     const handleClose = () => {
         setShowReviewModal(false)
         setFormData(fallBack)
+    }
+
+    const handleSuggestClose = () => {
+        setShowSuggestForm(false)
     }
 
     const handleReviewPopup = () => {
@@ -278,7 +284,10 @@ function GameDetails({currentUser}){
         })
     }}
 
-
+    const handleSuggestClick = () => {
+        setShowSuggestForm(true)
+    }
+ 
     const listNames = listOptions.map((option) => <option value={option.list_name} key={option.list_name}>{option.list_name}</option>)
 
     return(
@@ -324,7 +333,7 @@ function GameDetails({currentUser}){
             <button className='nes-btn is-success' onClick={handleAddClick} style={{fontSize: '10px', marginLeft: '8px'}}>Add</button>
             <br/>
             <br/>
-            <button className='nes-btn is-primary'>Suggest to Friend</button>
+            <button className='nes-btn is-primary' onClick={handleSuggestClick}>Suggest to Friend</button>
             <br/>
             <br/>
             {game.summary ? <h5>Game Summary:</h5> : null}
@@ -333,6 +342,8 @@ function GameDetails({currentUser}){
 
 
             <ReviewForm handleClose={handleClose} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
+
+            <SuggestForm handleClose={handleSuggestClose} game={game} showSuggestForm={showSuggestForm} currentUser={currentUser}/>
         </div>
     )
 }

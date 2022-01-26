@@ -354,6 +354,7 @@ body {
 
 .sent-message{
   text-align: right;
+  
   /* margin-right: 10%; */
 }
 
@@ -381,9 +382,37 @@ body {
 
 
 
+.suggestion-container{
+  width: 80%;
+  margin: 0 auto 3% auto;
+  text-align: center;
+  padding: 8px 10px 8px 10px;
+  color: white;
+  background-color: #212529;
+  box-shadow: 5px 5px 4px hsla(0, 40%, 31%, 0.575);
+  max-height: 80vh;
+  overflow : auto;
+}
 
+.suggestion-container img{
+  border-radius: 100%;
+  margin: 20px 6px 24px 6px;
+  width: 130px;
+  height: 130px;
+}
 
+.suggestion-container time{
+  font-size: 8px;
+}
 
+.suggestion-bubble{
+  text-align: left;
+  display: flex;
+}
+
+.suggestion-bubble a:hover{
+  color: rgb(25, 221, 7) !important;
+}
 
 
 

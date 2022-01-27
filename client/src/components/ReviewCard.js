@@ -8,7 +8,7 @@ function ReviewCard({review, currentUser}){
     let history = useNavigate()
 
     useEffect(() => {
-        fetch(`/api/users/${review.user_id}`).then(res => {
+        fetch(`api/users/${review.user_id}`).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

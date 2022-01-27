@@ -7,7 +7,7 @@ function Suggestions(){
     const [games, setGames] = useState([])
 
     useEffect(() => {
-        fetch('/api/suggestions').then(res => {
+        fetch('api/suggestions').then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

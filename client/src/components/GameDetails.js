@@ -43,7 +43,7 @@ function GameDetails({currentUser}){
             body: JSON.stringify(gameId)
         }
 
-        fetch('/api/show_game', configObj)
+        fetch('api/show_game', configObj)
             .then(res => res.json())
             .then(data =>{
                  setGame(data.game)
@@ -118,7 +118,7 @@ function GameDetails({currentUser}){
                 body: JSON.stringify(formData),
             }
 
-            fetch(`/api/reviews/${review.id}`, configObj).then(res => {
+            fetch(`api/reviews/${review.id}`, configObj).then(res => {
                 if(res.ok){
                     res.json().then((data) => {
                         setReview(data)
@@ -167,7 +167,7 @@ function GameDetails({currentUser}){
                 })
             }
 
-            fetch('/api/reviews', configObj).then(res => {
+            fetch('api/reviews', configObj).then(res => {
                 if(res.ok){
                     res.json().then((data) => {
                         setReview(data)
@@ -207,7 +207,7 @@ function GameDetails({currentUser}){
     }
 
     const handleDelete = (review) => {
-        fetch(`/api/reviews/${review.id}`, { method: 'DELETE' }).then(res => {
+        fetch(`api/reviews/${review.id}`, { method: 'DELETE' }).then(res => {
             if (res.ok) {
                 setReview(null)
                 const deleted = reviews.filter(r => r.id !== review.id)
@@ -229,7 +229,7 @@ function GameDetails({currentUser}){
     }
 
     const handleRemoveFromWishlist = () =>{
-        fetch(`/api/wishlists/${wishlist.id}`, { method: 'DELETE' }).then(res => {
+        fetch(`api/wishlists/${wishlist.id}`, { method: 'DELETE' }).then(res => {
             if (res.ok) {
                 setWishlist(null)
             } else {
@@ -255,7 +255,7 @@ function GameDetails({currentUser}){
             })
         }
 
-        fetch('/api/wishlists', configObj).then(res =>{
+        fetch('api/wishlists', configObj).then(res =>{
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -297,7 +297,7 @@ function GameDetails({currentUser}){
                 total_rating: game.total_rating
             })
         }
-        fetch('/api/list_items', configObj).then(res => {
+        fetch('api/list_items', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

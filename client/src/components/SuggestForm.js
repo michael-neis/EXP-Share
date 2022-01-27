@@ -7,7 +7,7 @@ function SuggestForm({ handleClose, currentUser, showSuggestForm, game}){
     const [selectedFriend, setSelectedFriend] = useState('default.friend.7028420')
 
     useEffect(() => {
-        fetch('/api/friendships').then(res => {
+        fetch('api/friendships').then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -29,7 +29,6 @@ function SuggestForm({ handleClose, currentUser, showSuggestForm, game}){
     }
 
     const handleSuggest = () => {
-        console.log(selectedFriend)
         if(selectedFriend === 'default.friend.7028420'){
             alert('Please select a friend first')
         }else{
@@ -46,7 +45,7 @@ function SuggestForm({ handleClose, currentUser, showSuggestForm, game}){
                 })
             }
 
-            fetch('/api/suggestions', configObj).then(res => {
+            fetch('api/suggestions', configObj).then(res => {
                 if(res.ok){
                     res.json()
                     .then(data => {

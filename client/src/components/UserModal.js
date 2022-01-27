@@ -8,7 +8,7 @@ function UserModal({showUserModal, handleClose, currentUser, setCurrentUser}){
     const handleLogout = () => {
         handleClose();
         setCurrentUser(null)
-        fetch('/api/logout', { method: 'DELETE' })
+        fetch('api/logout', { method: 'DELETE' })
         history('/')
     }
 

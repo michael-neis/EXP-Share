@@ -24,10 +24,7 @@ Rails.application.routes.draw do
     post '/search_users', to: "users#search_users"
     get '/show_user/:id', to: "users#show_user"
     get '/discover', to: "games#discover"
-   
-
-
-    get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
-    
   end
+
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

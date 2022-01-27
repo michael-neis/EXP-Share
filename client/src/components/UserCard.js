@@ -22,7 +22,7 @@ function UserCard({user}){
             })
         }
 
-        fetch('/api/friend_requests', configObj).then(res => {
+        fetch('api/friend_requests', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

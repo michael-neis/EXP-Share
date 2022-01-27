@@ -16,7 +16,7 @@ function UserPage(){
     let history = useNavigate()
 
     useEffect(() => {
-        fetch(`/api/show_user/${userId}`).then(res => {
+        fetch(`api/show_user/${userId}`).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -97,7 +97,7 @@ function UserPage(){
     }
 
     const handleRemoveClick = () => {
-        fetch(`/api/friendships/${user.id}`, { method: 'DELETE' }).then(res => {
+        fetch(`api/friendships/${user.id}`, { method: 'DELETE' }).then(res => {
             if(res.ok){
                 setUser({
                     ...user,
@@ -124,7 +124,7 @@ function UserPage(){
             })
         }
 
-        fetch('/api/friend_requests', configObj).then(res => {
+        fetch('api/friend_requests', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

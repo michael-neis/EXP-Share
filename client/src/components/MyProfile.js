@@ -78,7 +78,7 @@ function MyProfile({currentUser, setCurrentUser}){
             })
         }
 
-        fetch(`/api/users/${currentUser.id}`, configObj).then(res => {
+        fetch(`api/users/${currentUser.id}`, configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -108,7 +108,7 @@ function MyProfile({currentUser, setCurrentUser}){
             body: JSON.stringify(userFormData)
         }
 
-        fetch(`/api/users/${currentUser.id}`, configObj).then(res => {
+        fetch(`api/users/${currentUser.id}`, configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

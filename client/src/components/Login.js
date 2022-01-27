@@ -27,7 +27,7 @@ function Login({ setCurrentUser }){
 		body: JSON.stringify(formData)
 		}
 
-		fetch('/api/login', configObj).then((resp) =>{ 
+		fetch('api/login', configObj).then((resp) =>{ 
 			if (resp.ok) {
 				resp.json().then((user) => {
                 setCurrentUser(user)

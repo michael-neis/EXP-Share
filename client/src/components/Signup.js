@@ -27,7 +27,7 @@ function Signup({ setCurrentUser }) {
       body: JSON.stringify(formData)
     }
 
-    fetch('/api/signup', configObj).then((res) => {
+    fetch('api/signup', configObj).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
           setCurrentUser(user);

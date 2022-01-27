@@ -19,7 +19,7 @@ function SearchUsers(){
             })
         }
 
-        fetch('/api/search_users', configObj).then(res => {
+        fetch('api/search_users', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

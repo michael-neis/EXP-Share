@@ -18,7 +18,7 @@ function DiscoverGames(){
 
         setLoading(true)
 
-        fetch('/api/discover').then(res => {
+        fetch('api/discover').then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

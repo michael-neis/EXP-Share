@@ -23,7 +23,7 @@ function SearchGames(){
             body: JSON.stringify(searchTitle)
         }
 
-        fetch('/api/search_games', configObj).then((res) =>{ 
+        fetch('api/search_games', configObj).then((res) =>{ 
             if (res.ok) {
                 res.json().then((data) => {
                     setResults(data)

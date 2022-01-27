@@ -18,7 +18,7 @@ function MyLists({currentUser}){
 
 
   useEffect(() => {
-    fetch(`/api/user_lists/${currentUser.id}`).then(res => {
+    fetch(`api/user_lists/${currentUser.id}`).then(res => {
       if(res.ok){
         res.json()
         .then(data => {
@@ -92,7 +92,7 @@ function MyLists({currentUser}){
 
 
   const handleRemoveFromList = (itemId) => {
-    fetch(`/api/list_items/${itemId}`,  { method: 'DELETE' }).then(res => {
+    fetch(`api/list_items/${itemId}`,  { method: 'DELETE' }).then(res => {
       if (res.ok) {
           setListGames(listGames.filter(g => g.id !== itemId))
       } else {
@@ -134,7 +134,7 @@ function MyLists({currentUser}){
       body: JSON.stringify(formData),
     }
 
-    fetch(`/api/lists/${selectedList.id}`, configObj).then(res => {
+    fetch(`api/lists/${selectedList.id}`, configObj).then(res => {
       if(res.ok){
         res.json()
         .then(data => {
@@ -159,7 +159,7 @@ function MyLists({currentUser}){
         body: JSON.stringify(formData)
       }
 
-      fetch('/api/lists', configObj).then(res => {
+      fetch('api/lists', configObj).then(res => {
         if(res.ok){
           res.json()
           .then(data => {
@@ -182,7 +182,7 @@ function MyLists({currentUser}){
   }
 
   const handleDelete = () => {
-    fetch(`/api/lists/${selectedList.id}`, {method: 'DELETE'}).then(res => {
+    fetch(`api/lists/${selectedList.id}`, {method: 'DELETE'}).then(res => {
       if(res.ok){
         const deletedList = lists.filter(list => list.id !== selectedList.id)
         setLists(deletedList)

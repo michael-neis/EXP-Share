@@ -20,7 +20,7 @@ function Collection(){
             })
         }
 
-        fetch('/api/collection', configObj).then(res => {
+        fetch('api/collection', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

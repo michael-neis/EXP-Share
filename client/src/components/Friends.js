@@ -10,7 +10,7 @@ function Friends({ currentUser }){
     const [requestBool, setRequestBool] = useState(false)
 
     useEffect(() => {
-        fetch('/api/friendships').then(res => {
+        fetch('api/friendships').then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -26,7 +26,7 @@ function Friends({ currentUser }){
     }, [])
 
     const handleShowRequests = () => {
-        fetch(`/api/friend_requests/${currentUser.id}`).then(res => {
+        fetch(`api/friend_requests/${currentUser.id}`).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -55,7 +55,7 @@ function Friends({ currentUser }){
             })
         }
 
-        fetch('/api/friendships', configObj).then(res => {
+        fetch('api/friendships', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -73,7 +73,7 @@ function Friends({ currentUser }){
     }
 
     const handleReject = (req) => {
-        fetch(`/api/friend_requests/${req.id}`, { method: 'DELETE'}).then(res => {
+        fetch(`api/friend_requests/${req.id}`, { method: 'DELETE'}).then(res => {
             if(res.ok){
                 const deletedReq = requests.filter(r => r.id !== req.id)
                 setRequests([...deletedReq])
@@ -87,7 +87,7 @@ function Friends({ currentUser }){
     }
 
     const handleRemoveFriend = (friend) => {
-        fetch(`/api/friendships/${friend.id}`, { method: 'DELETE' }).then(res => {
+        fetch(`api/friendships/${friend.id}`, { method: 'DELETE' }).then(res => {
             if(res.ok){
                 const removedFriends = friends.filter(f => f.id !== friend.id)
                 setFriends([...removedFriends])

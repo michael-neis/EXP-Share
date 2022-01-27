@@ -10,7 +10,7 @@ function Messages({currentUser}){
     const userUsername = localStorage.getItem('userUsername')
 
     useEffect(() => {
-        fetch(`/api/messages/${userId}`).then(res => {
+        fetch(`api/messages/${userId}`).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {
@@ -46,7 +46,7 @@ function Messages({currentUser}){
             })
         }
 
-        fetch('/api/messages', configObj).then(res => {
+        fetch('api/messages', configObj).then(res => {
             if(res.ok){
                 res.json()
                 .then(data => {

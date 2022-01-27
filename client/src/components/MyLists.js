@@ -186,6 +186,8 @@ function MyLists({currentUser}){
       if(res.ok){
         const deletedList = lists.filter(list => list.id !== selectedList.id)
         setLists(deletedList)
+        setSelectedList('default.list.829920')
+        setListGames([])
         setListDesc('')
         setListName('')
       }else{

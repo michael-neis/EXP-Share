@@ -57,7 +57,7 @@
   font-size: 54px; 
   font-weight: 300; 
   line-height: 58px;
-  letter-spacing: 80px;
+  letter-spacing: 60px;
   animation: color-change 7s infinite;
 }
 
@@ -161,8 +161,8 @@ body {
 }
 
 .exp-header {
-  /* animation: color-change 7s infinite; */
-  color: greenyellow;
+  animation: color-change 7s infinite;
+  /* color: greenyellow; */
   font-size: 300%;
 }
 
@@ -457,8 +457,26 @@ body {
 }
 
 
+.platform-container{
+  margin-top: 2%;
+  display: inline-block;
+  white-space: nowrap;
+}
 
+.platform-container img{
+  width: 5%;
+  float: none;
+  box-shadow: 2px 2px 2px hsla(271, 66%, 57%, 0.575);
+}
 
+.platform-container img:hover{
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+  box-shadow: 4px 4px 4px hsla(271, 80%, 62%, 0.904);
+}
+
+.collection-a:hover{
+  color: rgb(25, 221, 7) !important;
+}
 
 
 

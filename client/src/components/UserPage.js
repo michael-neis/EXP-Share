@@ -54,7 +54,10 @@ function UserPage(){
         alert('Not Authorized')
     }
 
-    const allReviews = user.reviews.map((game) => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'reviews'} handleRemoveFromList={handleRemoveFromList} />)
+    const sortReviews = user.reviews.sort(function (a, b) {
+        return b.rating - a.rating;
+    })
+    const allReviews = sortReviews.map((game) => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'reviews'} handleRemoveFromList={handleRemoveFromList} />)
     const allWishlists= user.wishlists.map((game) => <ListGameCard key={game.id} itemId={null} game={game} listDesc={'wishlist'} handleRemoveFromList={handleRemoveFromList} />)
 
     const handleListChange = (e) => {

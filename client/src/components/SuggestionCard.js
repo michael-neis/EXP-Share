@@ -21,7 +21,7 @@ function SuggestionCard({game, sender}){
     const clickName = <a onClick={handleNameClick}>{sender.username}</a>
     const clickGame = <a onClick={handleGameClick}>{game.title}</a>
 
-    const dialogues = [<p>{clickName} thinks you should give {clickGame} a try</p>, <p>{clickName} reccommended {clickGame} to you</p>, <p>{clickName} suggests you play {clickGame}</p>, <p>{clickName} forsees you loving {clickGame}</p>]
+    const dialogues = [<p>{clickName} thinks you should give {clickGame} a try</p>, <p>{clickName} reccommended {clickGame} to you</p>, <p>{clickName} suggests you play {clickGame}</p>, <p>{clickName} reckons you would love {clickGame}</p>]
 
     const random = Math.floor(Math.random() * dialogues.length)
     const message = dialogues[random]

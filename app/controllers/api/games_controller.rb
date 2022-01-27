@@ -67,18 +67,35 @@ class Api::GamesController < ApplicationController
               "Client-ID" => "#{ENV['client_id_token']}",
               "Authorization" => "#{ENV['authorization_bearer_token']}"
             },
-            :body => "fields name, cover.image_id, total_rating, summary, genres.name; where id = #{game_id};"
+            :body => "fields name, cover.image_id, total_rating, summary, genres.name, platforms.websites.url, platforms.name, platforms.platform_logo.image_id, collection.name; where id = #{game_id};"
           )
 
           api_game = JSON.parse(response.body)
 
           render json: {game: api_game[0], review: review, wishlist: wishlist, lists: lists, db_id: db_id, review_array: review_array}, status: :ok
     end
+ 
+    def collection
+        collection_id = params[:collection_id]
+
+        response = HTTParty.post("https://api.igdb.com/v4/collections",
+
+            :headers => {
+              "Content-Type" => "text/plain",
+              "Client-ID" => "#{ENV['client_id_token']}",
+              "Authorization" => "#{ENV['authorization_bearer_token']}"
+            },
+            :body => "fields name, games.name, games.cover.image_id; where id = #{collection_id};"
+          )
+
+          render json: response.body
+
+    end
 
     
     def discover
         if current_user.reviews.length == 0
-            render json: {message: 'no reviews'}, status: :ok
+            render json: {message: 'no reviews'}, status: :unauthorized
         elsif current_user.top_games.length < 6
 
             all_games = []

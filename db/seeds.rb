@@ -2,8 +2,8 @@ puts "🌱 Seeding spices..."
 
 puts 'Creating users...'
 mike = User.create(username: "neisguy", profile_pic: "https://www.nicepng.com/png/detail/246-2469081_jake-adventure-time-and-jake-the-dog-image.png", bio: "I'm a pretty neis guy", password: "exp")
-joe = User.create(username: "goldennugget", profile_pic: "https://www.nicepng.com/png/detail/246-2469081_jake-adventure-time-and-jake-the-dog-image.png", bio: "bogos binted", password: "exp")
-mitch = User.create(username: "chocolaterain", profile_pic: "https://www.nicepng.com/png/detail/246-2469081_jake-adventure-time-and-jake-the-dog-image.png", bio: "father", password: "exp")
+joe = User.create(username: "goldennugget", profile_pic: "https://static.tvtropes.org/pmwiki/pub/images/morty_smith_2.png", bio: "cod legend", password: "exp")
+mitch = User.create(username: "chocolaterain", profile_pic: "https://s3.amazonaws.com/ghost-cms-woi/2021/06/BlueRecovery.jpg", password: "exp")
 
 
 puts 'Creating games...'
@@ -34,7 +34,7 @@ Wishlist.create(user_id: mike.id, game_id: bomb.id)
 
 puts 'Creating reviews...'
 Review.create(user_id: mike.id, game_id: bomb.id, rating: 7, comment: "I don't know what this game is but its aight")
-Review.create(user_id: mike.id, game_id: speed.id, rating: 9, comment: "fest.")
+Review.create(user_id: mike.id, game_id: speed.id, rating: 9, comment: "fast.")
 Review.create(user_id: joe.id, game_id: mission.id, rating: 3, comment: "wait a minute this isn't call of duty")
 Review.create(user_id: mitch.id, game_id: speed.id, rating: 5, comment: "I drive like this in my sleep")
 

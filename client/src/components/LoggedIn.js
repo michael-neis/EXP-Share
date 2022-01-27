@@ -11,6 +11,7 @@ import MyProfile from "./MyProfile";
 import UserPage from './UserPage'
 import Messages from './Messages'
 import Suggestions from "./Suggestions";
+import Collection from "./Collection"
 
 
 function LoggedIn({ setCurrentUser, currentUser }){
@@ -31,6 +32,7 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/user' element={<UserPage currentUser={currentUser}/>} />
                 <Route path='/messages' element={<Messages currentUser={currentUser}/>} />
                 <Route path='/suggestions' element={<Suggestions currentUser={currentUser}/>} />
+                <Route path='/collection' element={<Collection />} />
             </Routes>
             </div>
         </>

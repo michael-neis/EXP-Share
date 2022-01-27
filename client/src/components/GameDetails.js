@@ -3,6 +3,8 @@ import ReviewForm from './ReviewForm'
 import 'react-dropdown/style.css';
 import SuggestForm from './SuggestForm';
 import ReviewCard from './ReviewCard';
+import PlatformCard from './PlatformCard';
+import { useNavigate } from 'react-router-dom';
 
 function GameDetails({currentUser}){
 
@@ -25,6 +27,9 @@ function GameDetails({currentUser}){
     const [showSuggestForm, setShowSuggestForm] = useState(false)
     const [genres, setGenres] = useState([])
     const [reviews, setReviews] = useState([])
+    const [platforms, setPlatforms] = useState([])
+
+    let history = useNavigate()
 
     const gameId = localStorage.getItem('gameId')
     
@@ -44,6 +49,7 @@ function GameDetails({currentUser}){
                  setGame(data.game)
                  setGenres(data.game.genres)
                  setReviews(data.review_array)
+                 setPlatforms(data.game.platforms)
                  setGameExists(true)
                  setReview(data.review)
                  setWishlist(data.wishlist)
@@ -99,6 +105,7 @@ function GameDetails({currentUser}){
     const handleReviewPopup = () => {
         setShowReviewModal(true)
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -313,6 +320,11 @@ function GameDetails({currentUser}){
     const handleSuggestClick = () => {
         setShowSuggestForm(true)
     }
+
+    const handleCollectionClick = () => {
+        localStorage.setItem('collectionId', game.collection.id)
+        history('/collection')
+    }
  
     const listNames = listOptions.map((option) => <option value={option.list_name} key={option.list_name}>{option.list_name}</option>)
     const displayGenres = genres.map((genre) => genre.name).join(', ')
@@ -323,6 +335,22 @@ function GameDetails({currentUser}){
         displayReviews = reviews.map((review) => <ReviewCard key={review.id} review={review} currentUser={currentUser}/>)
     }else{
         displayReviews = null
+    }
+
+    let displayPlatforms
+
+    if(platforms){
+        displayPlatforms = platforms.map(platform => <PlatformCard key={platform.id} platform={platform}/>)
+    }else{
+        displayPlatforms = null
+    }
+
+    let displayCollection
+
+    if(game.collection){
+        displayCollection = <h4>Check out the entire <a className="collection-a" onClick={handleCollectionClick}>{game.collection.name}</a> collection!</h4>
+    }else{
+        displayCollection = null
     }
 
     return(
@@ -339,7 +367,7 @@ function GameDetails({currentUser}){
             null
             }
             {review ?
-            <h3>{review.rating}/10</h3>
+            <h3 style={{color: 'gold'}}>{review.rating}/10</h3>
             :
             null
             }
@@ -374,6 +402,12 @@ function GameDetails({currentUser}){
             <br/>
             {game.summary ? <h5>Game Summary:</h5> : null}
             {game.summary ? <p>{game.summary}</p> : null}
+
+            {displayCollection}
+
+            <div className="platform-container">
+            {displayPlatforms}
+            </div>
 
             <ReviewForm handleClose={handleClose} game={game} showReviewModal={showReviewModal} review={review} handleSubmit={handleSubmit} formData={formData} setFormData={setFormData} handleDelete={handleDelete}/>
 

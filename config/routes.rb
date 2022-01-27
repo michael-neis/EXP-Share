@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
     post '/show_game', to: "games#show_game"
     post '/search_games', to: "games#search_games"
+    post '/collection', to: "games#collection"
     get '/user_lists/:id', to: "lists#user_lists"
     get '/user_reviews/:id', to: "reviews#user_reviews"
     get '/user_wishlists/:id', to: "wishlists#user_wishlists"

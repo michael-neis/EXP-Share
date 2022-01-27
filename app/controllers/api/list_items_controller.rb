@@ -14,14 +14,15 @@ class Api::ListItemsController < ApplicationController
 
     def create
         if @list.user_id == current_user.id
-            if params[:game_id]
-                new_item = ListItem.create!(item_params)
-                puts 'it worked with established game'
+
+            game = Game.find_by(api_id: params[:api_id])
+
+            if game
+                new_item = ListItem.create!(list_id: params[:list_id], game_id: game.id)
                 render json: new_item, status: :created
             else
                 new_game = Game.create!(api_id: params[:api_id], title: params[:title], image_id: params[:image_id], total_rating: params[:total_rating])
                 new_game_item = ListItem.create!(list_id: params[:list_id], game_id: new_game.id)
-                puts 'it worked with non established game'
                 render :json => new_game_item, status: :created
             end
         else

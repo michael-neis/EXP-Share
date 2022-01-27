@@ -23,7 +23,7 @@ function ListGameCard({ game, listDesc, handleRemoveFromList, itemId }){
     
 
     if(listDesc === 'reviews'){
-        reviewRating = <p>{game.rating}/10</p>
+        reviewRating = <p style={{color: 'gold'}}>{game.rating}/10</p>
         game.comment ? reviewComment = <p>"{game.comment}"</p> : reviewComment = null
     }else if(listDesc === 'list'){
         gameButton = <button className='nes-btn is-error' onClick={handleDeleteModal}>Remove from list</button>

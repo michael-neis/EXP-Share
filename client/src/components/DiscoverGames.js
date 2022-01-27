@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import GameCard from './GameCard'
+import { useNavigate } from 'react-router-dom';
 
 function DiscoverGames(){
 
@@ -7,7 +8,13 @@ function DiscoverGames(){
     const [games, setGames] = useState([])
     const [loading, setLoading] = useState(false)
 
+    let history = useNavigate()
+
     const handleClick = () => {
+
+        if(games === 'no reviews'){
+            history('/search')
+        }else{
 
         setLoading(true)
 
@@ -21,14 +28,22 @@ function DiscoverGames(){
             }else{
                 res.json()
                 .then(errors => {
-                    console.log(errors)
+                    setGames(errors.message)
+                    setLoading(false)
                 })
             }
         })
         setShowBool(true)
     }
+}
 
-    const displayGames = games.map((game) => <GameCard key={game.id} game={game}/>)
+    let displayGames
+
+    if(games === 'no reviews'){
+        displayGames = <h3>Looks like you haven't reviewed any games yet</h3>
+    }else{
+        displayGames = games.map((game) => <GameCard key={game.id} game={game}/>)
+    }
 
     if(!showBool){
     return(

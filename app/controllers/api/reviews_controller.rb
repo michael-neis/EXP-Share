@@ -44,7 +44,8 @@ class Api::ReviewsController < ApplicationController
     def user_reviews
         user = User.find(params[:id])
         reviews = user.reviews
-        render :json => reviews, status: :ok
+        sorted = reviews.sort_by{|r| r[:rating]}.reverse
+        render :json => sorted, status: :ok
     end
 
     private

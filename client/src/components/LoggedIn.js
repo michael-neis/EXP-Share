@@ -33,7 +33,6 @@ function LoggedIn({ setCurrentUser, currentUser }){
                 <Route path='/messages' element={<Messages currentUser={currentUser}/>} />
                 <Route path='/suggestions' element={<Suggestions currentUser={currentUser}/>} />
                 <Route path='/collection' element={<Collection />} />
-                <Route path='/babady_boopy' element={<div>hello</div>} />
             </Routes>
             </div>
         </>

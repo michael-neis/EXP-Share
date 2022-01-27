@@ -25,9 +25,6 @@ function HomePage(){
                 <li>
                     <a href='/search_users'>Find Users</a>
                 </li>
-                <li>
-                    <a href='/babady_boopy'>Bogos binted</a>
-                </li>
             </ul>
         </div>
     )
